@@ -6,6 +6,7 @@ class ThemeState extends Equatable {
   const ThemeState({Themes? theme}) : selectedTheme = theme ?? Themes.system;
   @override
   List<Object?> get props => [selectedTheme];
+  
   ThemeState copyWith({Themes? selectedTheme}) {
     return ThemeState(theme: selectedTheme ?? this.selectedTheme);
   }

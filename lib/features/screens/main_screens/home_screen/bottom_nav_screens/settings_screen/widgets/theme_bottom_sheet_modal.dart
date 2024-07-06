@@ -13,6 +13,7 @@ class ThemeBottomSheetModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return BlocBuilder<ThemeBloc, ThemeState>(

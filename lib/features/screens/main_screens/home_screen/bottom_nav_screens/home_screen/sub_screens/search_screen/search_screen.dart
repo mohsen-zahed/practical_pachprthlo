@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/widgets/custom_search_field.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
+import 'package:practical_pachprthlo/packages/dropdown_search_package/my_dropdown_search_package.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final ValueNotifier<String> searchTerm = ValueNotifier<String>('');
   final TextEditingController searchController = TextEditingController();
   final FocusNode searchFocusNode = FocusNode();
+  bool isProSearchModelActive = false;
 
   @override
   void initState() {
@@ -35,16 +37,26 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            isProSearchModelActive = !isProSearchModelActive;
+          });
+        },
+        label: Text('change search mode'),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
           children: [
             Expanded(
-              child: CustomSearchField(
-                searchFocusNode: searchFocusNode,
-                searchController: searchController,
-                searchTerm: searchTerm,
-              ),
+              child: isProSearchModelActive
+                  ? MyDropdownSearchPackage.instance.dropDownWithSearchBar()
+                  : CustomSearchField(
+                      searchFocusNode: searchFocusNode,
+                      searchController: searchController,
+                      searchTerm: searchTerm,
+                    ),
             ),
             SizedBox(width: getScreenArea(context, 0.00003)),
             GestureDetector(
@@ -72,7 +84,10 @@ class _SearchScreenState extends State<SearchScreen> {
               //* Species is located on the card image as a badge...
               //* The name is an image credit tag on the card image and Expansion Tile's title...
               return element.species.toLowerCase().contains(value.trim().toLowerCase()) ||
-                  element.name.toLowerCase().contains(value.trim().toLowerCase());
+                  element.origin.toLowerCase().contains(value.trim().toLowerCase()) ||
+                  element.location.toLowerCase().contains(value.trim().toLowerCase()) ||
+                  element.gender.toLowerCase().contains(value.trim().toLowerCase()) ||
+                  element.type.toLowerCase().contains(value.trim().toLowerCase());
             }).toList();
           } else {
             searchedList = list;

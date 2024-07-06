@@ -25,7 +25,7 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
 
         final diseaseResponseResults = await diseaseDataProvider.fetchDiseaseData(page);
         if (diseaseResponseResults is DiseaseResponseModel) {
-          emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseModelList: diseaseResponseResults)));
+          emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResults)));
         } else {
           diseaseResponseResults is String;
           emit(state.copyWith(
@@ -48,9 +48,9 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
           if (state is DiseasesSuccess) {
             // final currentState = state as DiseasesSuccess;
 
-            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseModelList: diseaseResponseResult)));
+            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResult)));
           } else {
-            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseModelList: diseaseResponseResult)));
+            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResult)));
           }
         } catch (e) {
           emit(state.copyWith(diseasesState: DiseasesFailed(errorMessage: e.toString())));

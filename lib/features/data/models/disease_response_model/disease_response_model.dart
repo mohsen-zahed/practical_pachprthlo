@@ -11,13 +11,13 @@ class DiseaseResponseModel extends HiveObject {
   @HiveField(DiseaseResponseModelFields.infoModel)
   final InfoModel infoModel;
   @HiveField(DiseaseResponseModelFields.diseaseModel)
-  final List<DiseaseModel> diseaseModel;
+  final List<DiseaseModel> diseaseModelList;
 
   factory DiseaseResponseModel.fromJson(Map<String, dynamic> json) => DiseaseResponseModel(
         infoModel: InfoModel.fromJson(json['info']),
-        diseaseModel: List<DiseaseModel>.from(json['results'].map((x) => DiseaseModel.fromJson(x))),
+        diseaseModelList: List<DiseaseModel>.from(json['results'].map((x) => DiseaseModel.fromJson(x))),
       );
-  DiseaseResponseModel({required this.infoModel, required this.diseaseModel});
+  DiseaseResponseModel({required this.infoModel, required this.diseaseModelList});
 }
 
 @HiveType(typeId: HiveTypes.infoModel)

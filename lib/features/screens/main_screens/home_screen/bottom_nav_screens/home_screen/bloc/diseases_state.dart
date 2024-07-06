@@ -10,12 +10,12 @@ sealed class DiseasesState extends Equatable {
 final class DiseasesLoading extends DiseasesState {}
 
 final class DiseasesSuccess extends DiseasesState {
-  final DiseaseResponseModel diseaseModelList;
+  final DiseaseResponseModel diseaseResponseModel;
 
-  const DiseasesSuccess({required this.diseaseModelList});
+  const DiseasesSuccess({required this.diseaseResponseModel});
 
   @override
-  List<Object> get props => [diseaseModelList];
+  List<Object> get props => [diseaseResponseModel];
 }
 
 final class DiseasesFailed extends DiseasesState {

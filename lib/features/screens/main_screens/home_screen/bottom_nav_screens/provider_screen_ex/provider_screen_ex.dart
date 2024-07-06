@@ -23,6 +23,7 @@ class ProviderScreenEx extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: 'increase',
             onPressed: () {
               context.read<CounterProvider>().incrementNumber();
             },
@@ -30,6 +31,7 @@ class ProviderScreenEx extends StatelessWidget {
           ),
           SizedBox(height: getScreenArea(context, 0.000015)),
           FloatingActionButton(
+            heroTag: 'decrease',
             onPressed: () {
               context.read<CounterProvider>().decrementNumber();
             },

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
 import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
+import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/main_home_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => CounterProvider()),
+          ChangeNotifierProvider(create: (context) => CategoriesProvider()),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

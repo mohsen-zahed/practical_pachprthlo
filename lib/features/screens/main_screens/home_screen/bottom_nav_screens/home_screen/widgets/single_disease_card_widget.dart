@@ -105,70 +105,15 @@ class SingleDiseaseCardWidget extends StatelessWidget {
               ),
               subtitle: Wrap(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kGreyColorShade300,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
-                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
-                    child: Text(
-                      diseaseModel.species,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
-                    ),
-                  ),
+                  _buildInfoChip(context, diseaseModel.species),
                   SizedBox(width: getScreenArea(context, 0.000015)),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kGreyColorShade300,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
-                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
-                    child: Text(
-                      diseaseModel.gender,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
-                    ),
-                  ),
+                  _buildInfoChip(context, diseaseModel.gender),
                   SizedBox(width: getScreenArea(context, 0.000015)),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kGreyColorShade300,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
-                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
-                    child: Text(
-                      diseaseModel.location,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
-                    ),
-                  ),
+                  _buildInfoChip(context, diseaseModel.location),
                   SizedBox(width: getScreenArea(context, 0.000015)),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kGreyColorShade300,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
-                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
-                    child: Text(
-                      diseaseModel.origin,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
-                    ),
-                  ),
+                  _buildInfoChip(context, diseaseModel.origin),
                   SizedBox(width: getScreenArea(context, 0.000015)),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kGreyColorShade300,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
-                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
-                    child: Text(
-                      diseaseModel.type,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
-                    ),
-                  ),
+                  _buildInfoChip(context, diseaseModel.type),
                 ],
               ),
               children: [
@@ -182,6 +127,21 @@ class SingleDiseaseCardWidget extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoChip(BuildContext context, String label) {
+    return Container(
+      decoration: BoxDecoration(
+        color: kGreyColorShade300,
+        borderRadius: BorderRadius.circular(3),
+      ),
+      margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
+      padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.000015)),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kBlackColor),
       ),
     );
   }

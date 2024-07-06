@@ -45,6 +45,9 @@ dependencies:
   # Network Image
   cached_network_image: ^3.3.1
 
+  # Dropdown
+  dropdown_search: ^5.0.6
+
   # Charts
   fl_chart: ^0.68.0
 

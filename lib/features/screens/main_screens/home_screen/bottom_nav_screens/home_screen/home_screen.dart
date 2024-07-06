@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
+import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
+import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/search_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
@@ -21,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DiseaseBloc? _bloc;
   StreamSubscription? _streamSubscription;
+
   @override
   void dispose() {
     super.dispose();
@@ -38,12 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, state) {
               if (state.diseasesState is DiseasesSuccess) {
                 final DiseasesSuccess diseaseResponseModel = state.diseasesState as DiseasesSuccess;
-
                 return IconButton(
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true).push(
                       CupertinoPageRoute(
-                        builder: (context) => SearchScreen(diseaseList: diseaseResponseModel.diseaseModelList.diseaseModel),
+                        builder: (context) => SearchScreen(diseaseList: diseaseResponseModel.diseaseResponseModel.diseaseModelList),
                       ),
                     );
                   },
@@ -67,9 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
         listenWhen: (previous, current) {
           return previous.diseasesState != current.diseasesState;
         },
-        builder: (context, state) {
+        builder: (builderContext, state) {
           if (state.diseasesState is DiseasesSuccess) {
-            final DiseasesSuccess diseaseResponseModel = state.diseasesState as DiseasesSuccess;
+            final DiseasesSuccess diseaseResponseStatus = state.diseasesState as DiseasesSuccess;
+            final List<DiseaseModel> diseaseList = diseaseResponseStatus.diseaseResponseModel.diseaseModelList;
+
             //* Succuss state...
             return RefreshIndicator(
               onRefresh: () async {
@@ -77,11 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: ListView.builder(
                 controller: BlocProvider.of<DiseaseBloc>(context).scrollController,
-                itemCount: BlocProvider.of<DiseaseBloc>(context).isLoadingMore
-                    ? diseaseResponseModel.diseaseModelList.diseaseModel.length + 1
-                    : diseaseResponseModel.diseaseModelList.diseaseModel.length,
+                itemCount: BlocProvider.of<DiseaseBloc>(context).isLoadingMore ? diseaseList.length + 1 : diseaseList.length,
                 itemBuilder: (context, index) {
-                  if (index >= diseaseResponseModel.diseaseModelList.diseaseModel.length) {
+                  if (index >= diseaseList.length) {
                     return Column(
                       children: [
                         SizedBox(height: getScreenArea(context, 0.00001)),
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     );
                   } else {
-                    return SingleDiseaseCardWidget(diseaseModel: diseaseResponseModel.diseaseModelList.diseaseModel[index], index: index);
+                    return SingleDiseaseCardWidget(diseaseModel: diseaseList[index], index: index);
                   }
                 },
               ),
@@ -132,6 +134,14 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         listener: (BuildContext context, DiseasesStatus state) async {
           if (state.diseasesState is DiseasesSuccess) {
+            final list = (state.diseasesState as DiseasesSuccess).diseaseResponseModel.diseaseModelList;
+            for (var i = 0; i < list.length; i++) {
+              context.read<CategoriesProvider>().addCategory(list[i].species);
+              context.read<CategoriesProvider>().addCategory(list[i].gender);
+              context.read<CategoriesProvider>().addCategory(list[i].location);
+              context.read<CategoriesProvider>().addCategory(list[i].origin);
+              context.read<CategoriesProvider>().addCategory(list[i].type);
+            }
             await di<MyConnectivityPlusPackage>().checkInternetConnection().then(
               (value) {
                 final String source = value ? "API" : "Database";

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,26 +19,13 @@ class MySharedPreferences {
     return sharedPreferences.getString(languageKey);
   }
 
-  Future<void> storeTheme(ThemeMode themeCode) async {
+  Future<void> storeTheme(String theme) async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(themeKey, themeCode.toString());
+    await sharedPreferences.setString(themeKey, theme);
   }
 
-  Future<ThemeMode?> getTheme() async {
+  Future<String?> getTheme() async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    return _themeModeFromString(sharedPreferences.getString(themeKey));
-  }
-
-  ThemeMode _themeModeFromString(String? themeModeString) {
-    if (themeModeString != null) {
-      switch (themeModeString) {
-        case 'ThemeMode.light':
-          return ThemeMode.light;
-        default:
-          return ThemeMode.dark;
-      }
-    } else {
-      return ThemeMode.light;
-    }
+    return sharedPreferences.getString(themeKey);
   }
 }
