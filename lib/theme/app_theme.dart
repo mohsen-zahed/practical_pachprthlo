@@ -4,6 +4,7 @@ import 'package:practical_pachprthlo/config/constants/colors.dart';
 class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
+      colorSchemeSeed: kPurpleColor,
       brightness: Brightness.light,
       scaffoldBackgroundColor: kWhiteColor,
       appBarTheme: const AppBarTheme(
@@ -49,7 +50,7 @@ class AppTheme {
 
   static ThemeData darkTheme() {
     return ThemeData(
-      primarySwatch: Colors.indigo,
+      colorSchemeSeed: kPurpleColor,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: kGreyColorShade900,
       appBarTheme: AppBarTheme(
