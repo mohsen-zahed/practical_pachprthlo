@@ -36,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.practicalPachprthlo, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: kWhiteColor)),
+        title:
+            Text(AppLocalizations.of(context)!.practicalPachprthloText, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: kWhiteColor)),
         actions: [
           BlocConsumer<DiseaseBloc, DiseasesStatus>(
             builder: (context, state) {
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(height: getScreenArea(context, 0.00001)),
                         const CupertinoActivityIndicator(),
                         SizedBox(height: getScreenArea(context, 0.000007)),
-                        Text('Loading More...', style: Theme.of(context).textTheme.bodySmall),
+                        Text(AppLocalizations.of(context)!.loadingMoreText, style: Theme.of(context).textTheme.bodySmall),
                         SizedBox(height: getScreenArea(context, 0.00004)),
                       ],
                     );
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     context.read<DiseaseBloc>().add(FetchDiseases());
                   },
-                  child: const Text('Try again'),
+                  child: Text(AppLocalizations.of(context)!.tryAgainText),
                 ),
               ],
             );
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const CupertinoActivityIndicator(),
                   SizedBox(height: getScreenArea(context, 0.00003)),
-                  Text('Loading Creatures...', style: Theme.of(context).textTheme.bodyMedium),
+                  Text(AppLocalizations.of(context)!.loadingCreatureText, style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
             );
@@ -145,8 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             await di<MyConnectivityPlusPackage>().checkInternetConnection().then(
               (value) {
-                final String source = value ? "API" : "Database";
-                String msg = "Data retrieved from $source";
+                final String source = value ? AppLocalizations.of(context)!.apiText : AppLocalizations.of(context)!.databaseText;
+                String msg = "${AppLocalizations.of(context)!.dataRetrievedFromText} $source";
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(msg)),
                 );

@@ -22,11 +22,7 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
     emit(
       state.copyWith(
         selectedLanguage: selectedLanguage != null
-            ? Languages.values.where((element) {
-                print(element.locale.languageCode == selectedLanguage);
-                print(element.locale.languageCode);
-                return element.locale.languageCode == selectedLanguage;
-              }).first
+            ? Languages.values.where((element) => element.locale.languageCode == selectedLanguage).toList().first
             : Languages.persian,
       ),
     );

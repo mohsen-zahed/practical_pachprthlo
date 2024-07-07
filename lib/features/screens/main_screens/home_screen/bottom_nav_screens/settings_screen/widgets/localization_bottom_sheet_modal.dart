@@ -19,7 +19,7 @@ class LocalizationBottomSheetModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppLocalizations.of(context)!.changeLanguage, style: Theme.of(context).textTheme.titleLarge),
+            Text(AppLocalizations.of(context)!.changeLanguageText, style: Theme.of(context).textTheme.titleLarge),
             SizedBox(height: getScreenArea(context, 0.00005)),
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
@@ -51,7 +51,7 @@ class LocalizationBottomSheetModal extends StatelessWidget {
                           ).then(
                             (value) {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text("${AppLocalizations.of(context)!.languageChangedTo} ${Languages.values[index].name}"),
+                                content: Text("${AppLocalizations.of(context)!.languageChangedToText} ${Languages.values[index].name}"),
                               ));
                             },
                           );

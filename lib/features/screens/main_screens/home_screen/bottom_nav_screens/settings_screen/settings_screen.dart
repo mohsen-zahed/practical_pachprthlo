@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/localization_bottom_sheet_modal.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/theme_bottom_sheet_modal.dart';
@@ -11,7 +12,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings Screen'),
+        title: Text(AppLocalizations.of(context)!.settingsScreenText),
       ),
       body: Center(
         child: Column(
@@ -32,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
                   );
                 },
                 leading: const Icon(Icons.palette),
-                title: const Text('Theme mode'),
+                title: Text(AppLocalizations.of(context)!.appThemeModeText),
                 trailing: Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: getScreenArea(context, 0.00005),
@@ -54,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                   );
                 },
                 leading: const Icon(Icons.language),
-                title: const Text('Language'),
+                title: Text(AppLocalizations.of(context)!.appLanguageText),
                 trailing: Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: getScreenArea(context, 0.00005),

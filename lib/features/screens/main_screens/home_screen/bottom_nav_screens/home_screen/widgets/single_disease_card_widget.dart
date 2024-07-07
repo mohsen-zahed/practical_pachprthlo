@@ -33,7 +33,8 @@ class SingleDiseaseCardWidget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(CupertinoPageRoute(builder: (context) => FullScreenImage(imageUrl: diseaseModel.image)));
+                Navigator.of(context, rootNavigator: true)
+                    .push(CupertinoPageRoute(builder: (context) => FullScreenImage(imageUrl: diseaseModel.image)));
               },
               child: Container(
                 height: getScreenArea(context, 0.001),

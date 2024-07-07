@@ -6,7 +6,7 @@ class MyDropdownSearchPackage {
   MyDropdownSearchPackage._();
 
   static DropdownSearch dropDownWithSearchBar(
-      {required BuildContext context, required Function(String?) onChanged, required List<String> searchItems}) {
+      {required BuildContext context, required Function(String?) onChanged, required List<String> searchItems, required String placeHolder}) {
     return DropdownSearch<String>(
       popupProps: const PopupProps.menu(
         showSelectedItems: true,
@@ -14,7 +14,7 @@ class MyDropdownSearchPackage {
       items: searchItems,
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-          hintText: "Search by Categories... Humanoid, Male, Alien etc.",
+          hintText: placeHolder,
           hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: kWhiteColor),
         ),
       ),

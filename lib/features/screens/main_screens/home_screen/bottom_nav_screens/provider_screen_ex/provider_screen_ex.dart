@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/providers/counter_provider.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class ProviderScreenEx extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Provider Example Screen'),
+        title: Text(AppLocalizations.of(context)!.providerExampleScreenText),
       ),
       body: Center(
         child: Text(

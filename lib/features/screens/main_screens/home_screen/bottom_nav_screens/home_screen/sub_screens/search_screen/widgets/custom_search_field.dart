@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class CustomSearchField extends StatelessWidget {
       focusNode: searchFocusNode,
       controller: searchController,
       decoration: InputDecoration(
-        hintText: 'Search by Categories... Humanoid, Male, Alien etc.',
+        hintText: AppLocalizations.of(context)!.searchByCategoriesText,
         hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: kWhiteColor),
         filled: true,
         fillColor: kWhiteColor.withOpacity(0.3),

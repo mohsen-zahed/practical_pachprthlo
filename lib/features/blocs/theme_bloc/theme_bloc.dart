@@ -18,6 +18,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   _onGetTheme(GetTheme event, Emitter<ThemeState> emit) async {
     final String? selectedTheme = await MySharedPreferences.instance.getTheme();
-    emit(state.copyWith(selectedTheme: Themes.values.where((element) => element.name == selectedTheme).first));
+    emit(
+      state.copyWith(
+        selectedTheme: selectedTheme != null ? Themes.values.where((element) => element.name == selectedTheme).toList().first : Themes.system,
+      ),
+    );
   }
 }

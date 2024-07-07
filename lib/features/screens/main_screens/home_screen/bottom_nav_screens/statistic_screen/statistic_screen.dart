@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_statistic_repository.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/packages/fl_chart_package/my_fl_chart_package.dart';
@@ -16,7 +17,7 @@ class StatisticScreen extends StatelessWidget {
       create: (context) => StatisticBloc(statisticRepository)..add(StatisticRequested()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Statistic Review'),
+          title: Text(AppLocalizations.of(context)!.statisticReviewText),
         ),
         body: BlocBuilder<StatisticBloc, StatisticStatus>(
           builder: (context, state) {
@@ -87,7 +88,7 @@ class StatisticScreen extends StatelessWidget {
                       onPressed: () {
                         context.read<StatisticBloc>().add(StatisticRequested());
                       },
-                      child: const Text('Refresh'),
+                      child: Text(AppLocalizations.of(context)!.refreshText),
                     ),
                   ],
                 ),
@@ -100,7 +101,7 @@ class StatisticScreen extends StatelessWidget {
                   children: [
                     const CupertinoActivityIndicator(),
                     SizedBox(height: getScreenArea(context, 0.00003)),
-                    Text('Statistics are getting ready...', style: Theme.of(context).textTheme.bodyMedium),
+                    Text(AppLocalizations.of(context)!.statisticsAreGettingReadyText, style: Theme.of(context).textTheme.bodyMedium),
                   ],
                 ),
               );
@@ -110,13 +111,13 @@ class StatisticScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Something went wrong!\nTry to refresh the screen.'),
+                    Text("${AppLocalizations.of(context)!.somethingWentWrongText}\n${AppLocalizations.of(context)!.tryToRefreshTheScreenText}"),
                     SizedBox(height: getScreenArea(context, 0.00003)),
                     ElevatedButton(
                       onPressed: () {
                         context.read<StatisticBloc>().add(StatisticRequested());
                       },
-                      child: const Text('Refresh'),
+                      child: Text(AppLocalizations.of(context)!.refreshText),
                     ),
                   ],
                 ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
+import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/widgets/custom_search_field.dart';
@@ -47,9 +50,15 @@ class _SearchScreenState extends State<SearchScreen> {
         },
         label: Row(
           children: [
-            Text(isProSearchModelActive ? 'Simple Search' : 'Pro Search'),
+            Text(isProSearchModelActive ? AppLocalizations.of(context)!.searchSimpleText : AppLocalizations.of(context)!.searchProText),
             SizedBox(width: getScreenArea(context, 0.000005)),
-            Icon(Icons.keyboard_arrow_right_rounded, size: getScreenArea(context, 0.00006)),
+            BlocBuilder<LocalizationBloc, LocalizationState>(
+              builder: (context, state) {
+                return Icon(
+                    state.selectedLanguage.locale == const Locale('fa') ? Icons.keyboard_arrow_left_rounded : Icons.keyboard_arrow_right_rounded,
+                    size: getScreenArea(context, 0.00006));
+              },
+            ),
           ],
         ),
       ),
@@ -60,6 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: isProSearchModelActive
                   ? MyDropdownSearchPackage.dropDownWithSearchBar(
+                      placeHolder: AppLocalizations.of(context)!.searchByCategoriesText,
                       context: context,
                       onChanged: (value) {
                         searchTerm.value = value!;
@@ -107,8 +117,8 @@ class _SearchScreenState extends State<SearchScreen> {
             searchedList = list;
           }
           if (searchedList.isEmpty) {
-            return const Center(
-              child: Text('No creatures found...'),
+            return Center(
+              child: Text(AppLocalizations.of(context)!.noCreaturesFoundText),
             );
           } else {
             return ListView.builder(

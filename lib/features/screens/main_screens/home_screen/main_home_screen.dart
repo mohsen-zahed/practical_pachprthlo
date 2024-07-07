@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/home_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/provider_screen_ex/provider_screen_ex.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/settings_screen.dart';
@@ -72,22 +73,22 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
               debugPrint(_history.toString());
             });
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: const Icon(Icons.home),
+              label: AppLocalizations.of(context)!.homeText,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.stacked_bar_chart),
-              label: 'Statistics',
+              icon: const Icon(Icons.stacked_bar_chart),
+              label: AppLocalizations.of(context)!.statisticsText,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.preview_outlined),
-              label: 'ProviderEx',
+              icon: const Icon(Icons.preview_outlined),
+              label: AppLocalizations.of(context)!.providerText,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
+              icon: const Icon(Icons.settings),
+              label: AppLocalizations.of(context)!.settingsText,
             ),
           ],
         ),
