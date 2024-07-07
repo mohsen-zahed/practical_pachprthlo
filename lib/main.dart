@@ -8,10 +8,12 @@ import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/b
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/main_home_screen.dart';
 import 'package:practical_pachprthlo/features/providers/counter_provider.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
+// import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 import 'package:practical_pachprthlo/theme/app_theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:provider/provider.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 ///*** ************************************************* ***\\\
 //* This is a project for testing, a combination of *\\
@@ -22,6 +24,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupDi();
+  // final x = await SharedPreferences.getInstance();
+  // print(x.getString(languageKey));
+  // x.clear();
+  // print(x.getString(languageKey));
   runApp(const MyApp());
 }
 
@@ -50,17 +56,24 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CounterProvider()),
           ChangeNotifierProvider(create: (context) => CategoriesProvider()),
         ],
-        child: BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (context, state) {
-            return MaterialApp(
-              title: 'Practical pachprthlo',
-              theme: AppTheme.lightTheme(),
-              darkTheme: AppTheme.darkTheme(),
-              themeMode: state.selectedTheme.themeMode,
-              debugShowCheckedModeBanner: false,
-              supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              home: const MainHomeScreen(),
+        child: BlocBuilder<LocalizationBloc, LocalizationState>(
+          buildWhen: (previous, current) => previous.selectedLanguage != current.selectedLanguage,
+          builder: (context, languageState) {
+            return BlocBuilder<ThemeBloc, ThemeState>(
+              buildWhen: (previous, current) => previous.selectedTheme != current.selectedTheme,
+              builder: (context, themeState) {
+                return MaterialApp(
+                  title: 'Practical pachprthlo',
+                  theme: AppTheme.lightTheme(),
+                  darkTheme: AppTheme.darkTheme(),
+                  themeMode: themeState.selectedTheme.themeMode,
+                  debugShowCheckedModeBanner: false,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  localizationsDelegates: AppLocalizations.localizationsDelegates,
+                  locale: languageState.selectedLanguage.locale,
+                  home: const MainHomeScreen(),
+                );
+              },
             );
           },
         ),

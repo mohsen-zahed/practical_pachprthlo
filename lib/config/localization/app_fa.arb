@@ -1,7 +1,9 @@
 {
     "@@locale": "fa",
-    "themeChangedTo": "تم با تغییر کرد به ",
-    "languageChangedTo": "زبان برنامه تغییر کرد به",
+    "themeChangedTo": "تم با موفقیت تغییر کرد به ",
+    "languageChangedTo": "زبان برنامه با موفقیت تغییر کرد به",
     "persian": "فارسی",
-    "english": "انگلیسی"
+    "english": "انگلیسی",
+    "changeLanguage": "تغییر زبان برنامه",
+    "changeTheme": "تغییر تم برنامه"
 }

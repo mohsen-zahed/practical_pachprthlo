@@ -1,7 +1,9 @@
 {
     "@@locale": "en",
     "themeChangedTo": "Theme changed to ",
-    "languageChangedTo": "languageChangedTo",
+    "languageChangedTo": "Language Successfully Changed To",
     "persian": "Persian",
-    "English": "English"
+    "english": "English",
+    "changeLanguage": "Change app language",
+    "changeTheme": "Change app theme"
 }

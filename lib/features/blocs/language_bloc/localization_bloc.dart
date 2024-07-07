@@ -21,8 +21,13 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
     final String? selectedLanguage = await MySharedPreferences.instance.getLanguage();
     emit(
       state.copyWith(
-        selectedLanguage:
-            selectedLanguage != null ? Languages.values.where((element) => element.locale.languageCode == selectedLanguage).first : Languages.persian,
+        selectedLanguage: selectedLanguage != null
+            ? Languages.values.where((element) {
+                print(element.locale.languageCode == selectedLanguage);
+                print(element.locale.languageCode);
+                return element.locale.languageCode == selectedLanguage;
+              }).first
+            : Languages.persian,
       ),
     );
   }

@@ -12,12 +12,12 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     on<GetTheme>(_onGetTheme);
   }
   _onChangeThemeMode(ChangeThemeMode event, Emitter<ThemeState> emit) async {
-    await MySharedPreferences.instance.storeTheme(event.selectedTheme.themeMode.name);
+    await MySharedPreferences.instance.storeTheme(event.selectedTheme.name);
     emit((state.copyWith(selectedTheme: event.selectedTheme)));
   }
 
   _onGetTheme(GetTheme event, Emitter<ThemeState> emit) async {
     final String? selectedTheme = await MySharedPreferences.instance.getTheme();
-    emit(state.copyWith(selectedTheme: Themes.values.where((element) => element.themeMode.name == selectedTheme).first));
+    emit(state.copyWith(selectedTheme: Themes.values.where((element) => element.name == selectedTheme).first));
   }
 }
