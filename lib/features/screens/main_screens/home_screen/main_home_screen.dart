@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/home_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/provider_screen_ex/provider_screen_ex.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/settings_screen.dart';
@@ -64,7 +63,6 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: kRedColor,
           currentIndex: selectedScreenIndex,
           onTap: (selectedIndex) {
             setState(() {

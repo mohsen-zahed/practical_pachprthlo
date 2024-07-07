@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
+import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagination with Search Test', style: Theme.of(context).textTheme.titleLarge!.copyWith(color: kWhiteColor)),
+        title: Text(AppLocalizations.of(context)!.practicalPachprthlo, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: kWhiteColor)),
         actions: [
           BlocConsumer<DiseaseBloc, DiseasesStatus>(
             builder: (context, state) {

@@ -1,29 +1,24 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:practical_pachprthlo/config/constants/colors.dart';
 
 class MyDropdownSearchPackage {
-  static MyDropdownSearchPackage? _instance;
   MyDropdownSearchPackage._();
-  static MyDropdownSearchPackage get instance {
-    _instance ??= MyDropdownSearchPackage._();
-    return _instance!;
-  }
 
-  DropdownSearch dropDownWithSearchBar() {
+  static DropdownSearch dropDownWithSearchBar(
+      {required BuildContext context, required Function(String?) onChanged, required List<String> searchItems}) {
     return DropdownSearch<String>(
-      popupProps: PopupProps.menu(
+      popupProps: const PopupProps.menu(
         showSelectedItems: true,
-        disabledItemFn: (String s) => s.startsWith('I'),
       ),
-      items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+      items: searchItems,
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-          labelText: "Menu mode",
-          hintText: "country in menu mode",
+          hintText: "Search by Categories... Humanoid, Male, Alien etc.",
+          hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: kWhiteColor),
         ),
       ),
-      onChanged: print,
-      selectedItem: "Brazil",
+      onChanged: onChanged,
     );
   }
 }

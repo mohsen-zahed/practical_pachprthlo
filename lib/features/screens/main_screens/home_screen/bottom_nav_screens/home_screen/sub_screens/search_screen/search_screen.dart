@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
+import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/widgets/custom_search_field.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
 import 'package:practical_pachprthlo/packages/dropdown_search_package/my_dropdown_search_package.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key, required this.diseaseList});
@@ -43,7 +45,13 @@ class _SearchScreenState extends State<SearchScreen> {
             isProSearchModelActive = !isProSearchModelActive;
           });
         },
-        label: Text('change search mode'),
+        label: Row(
+          children: [
+            Text(isProSearchModelActive ? 'Simple Search' : 'Pro Search'),
+            SizedBox(width: getScreenArea(context, 0.000005)),
+            Icon(Icons.keyboard_arrow_right_rounded, size: getScreenArea(context, 0.00006)),
+          ],
+        ),
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -51,7 +59,13 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Expanded(
               child: isProSearchModelActive
-                  ? MyDropdownSearchPackage.instance.dropDownWithSearchBar()
+                  ? MyDropdownSearchPackage.dropDownWithSearchBar(
+                      context: context,
+                      onChanged: (value) {
+                        searchTerm.value = value!;
+                      },
+                      searchItems: Provider.of<CategoriesProvider>(context).searchCategoriesList,
+                    )
                   : CustomSearchField(
                       searchFocusNode: searchFocusNode,
                       searchController: searchController,

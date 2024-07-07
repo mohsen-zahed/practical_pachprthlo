@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
+import 'package:practical_pachprthlo/widgets/full_screen_image.dart';
 
 class SingleDiseaseCardWidget extends StatelessWidget {
   final DiseaseModel diseaseModel;
@@ -29,68 +31,73 @@ class SingleDiseaseCardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              height: getScreenArea(context, 0.001),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(diseaseModel.image),
-                  fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(builder: (context) => FullScreenImage(imageUrl: diseaseModel.image)));
+              },
+              child: Container(
+                height: getScreenArea(context, 0.001),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(diseaseModel.image),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    child: Container(
-                      width: double.infinity,
-                      height: getMediaQueryHeight(context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: gradientColors,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      child: Container(
+                        width: double.infinity,
+                        height: getMediaQueryHeight(context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: gradientColors,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: getScreenArea(context, 0.00006),
-                    left: getScreenArea(context, 0.00006),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: getScreenArea(context, 0.00003),
-                            vertical: getScreenArea(context, 0.000001),
+                    Positioned(
+                      bottom: getScreenArea(context, 0.00006),
+                      left: getScreenArea(context, 0.00006),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: getScreenArea(context, 0.00003),
+                              vertical: getScreenArea(context, 0.000001),
+                            ),
+                            decoration: BoxDecoration(
+                              color: kWhiteColor,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Text(
+                              diseaseModel.species,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                            color: kWhiteColor,
-                            borderRadius: BorderRadius.circular(100),
+                          SizedBox(height: getScreenArea(context, 0.00003)),
+                          Text(
+                            diseaseModel.createdOn.toString(),
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhiteColor),
                           ),
-                          child: Text(
-                            diseaseModel.species,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ),
-                        SizedBox(height: getScreenArea(context, 0.00003)),
-                        Text(
-                          diseaseModel.createdOn.toString(),
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhiteColor),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: getScreenArea(context, 0.00003),
-                    right: getScreenArea(context, 0.00004),
-                    child: Text(
-                      'Image by: ${diseaseModel.name}',
-                      style: Theme.of(context).textTheme.labelSmall!.copyWith(color: kWhiteColor),
+                    Positioned(
+                      bottom: getScreenArea(context, 0.00003),
+                      right: getScreenArea(context, 0.00004),
+                      child: Text(
+                        'Image by: ${diseaseModel.name}',
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(color: kWhiteColor),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             ExpansionTile(
@@ -134,7 +141,7 @@ class SingleDiseaseCardWidget extends StatelessWidget {
   Widget _buildInfoChip(BuildContext context, String label) {
     return Container(
       decoration: BoxDecoration(
-        color: kGreyColorShade300,
+        color: kGreyColorShade200,
         borderRadius: BorderRadius.circular(3),
       ),
       margin: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),

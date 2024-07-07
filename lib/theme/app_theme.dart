@@ -21,14 +21,28 @@ class AppTheme {
         selectedItemColor: kPurpleColor,
         unselectedItemColor: kGreyColorShade800,
       ),
-      listTileTheme: ListTileThemeData(tileColor: kGreyColorShade300),
+      cardTheme: CardTheme(
+        color: kWhiteColor,
+        elevation: 5,
+        shadowColor: kBlackColorOp5,
+      ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: kWhiteColor,
         elevation: 10,
         showCloseIcon: true,
         contentTextStyle: TextStyle(color: kBlackColor),
       ),
+      listTileTheme: ListTileThemeData(tileColor: kGreyColorShade300),
       bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kWhiteColor),
+      expansionTileTheme: const ExpansionTileThemeData(
+        collapsedBackgroundColor: kWhiteColor,
+        backgroundColor: kWhiteColor,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          iconColor: WidgetStateProperty.all(kWhiteColor),
+        ),
+      ),
       textTheme: lightTextTheme,
     );
   }
@@ -55,7 +69,6 @@ class AppTheme {
       cardTheme: CardTheme(
         color: kGreyColorShade800,
       ),
-      bottomSheetTheme: BottomSheetThemeData(backgroundColor: kGreyColorShade900),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: kGreyColorShade900,
         showCloseIcon: true,
@@ -64,6 +77,11 @@ class AppTheme {
       listTileTheme: ListTileThemeData(
         tileColor: kGreyColorShade800,
         textColor: kWhiteColor,
+      ),
+      bottomSheetTheme: BottomSheetThemeData(backgroundColor: kGreyColorShade900),
+      expansionTileTheme: ExpansionTileThemeData(
+        collapsedBackgroundColor: kGreyColorShade800,
+        backgroundColor: kGreyColorShade800,
       ),
       textTheme: darkTextTheme,
     );

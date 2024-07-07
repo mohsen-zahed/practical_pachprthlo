@@ -33,6 +33,7 @@ class CustomSearchField extends StatelessWidget {
         suffixIcon: PopupMenuButton(
           itemBuilder: (BuildContext context) {
             final list = Provider.of<CategoriesProvider>(context, listen: false).searchCategoriesList;
+            list.sort();
             return [
               ...List.generate(
                 list.length,
