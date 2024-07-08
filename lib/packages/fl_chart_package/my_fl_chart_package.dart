@@ -160,7 +160,7 @@ class MyFlChartPackage {
           ),
           RadarDataSet(
             entryRadius: 5,
-            borderColor: kPurpleColor,
+            borderColor: kPrimaryColor,
             borderWidth: 1,
             fillColor: kTransparentColor,
             dataEntries: [

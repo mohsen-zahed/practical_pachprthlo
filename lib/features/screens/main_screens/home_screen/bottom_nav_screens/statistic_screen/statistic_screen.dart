@@ -42,7 +42,7 @@ class StatisticScreen extends StatelessWidget {
                         child: MyFlChartPackage.instance.drawPieChart(
                           sections: chartValuesList,
                           colors: [
-                            kPurpleColor,
+                            kPrimaryColor,
                             kGreenColor,
                             kBlueColor,
                             kRedColor,

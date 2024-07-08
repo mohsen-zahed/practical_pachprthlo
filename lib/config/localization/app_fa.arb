@@ -29,5 +29,8 @@
     "providerExampleScreenText": "صفحه مثال از تهیه کننده",
     "settingsScreenText": "تنظیمات",
     "refreshText": "تازه سازی",
-    "loadingMoreText": "در حال بارگیری بیشتر..."
+    "loadingMoreText": "در حال بارگیری بیشتر...",
+    "changeAppColor": "تغییر رنگ برنامه",
+    "pickAColor": "رنگ مورد نظر را انتخاب کنید",
+    "applyColor": "انتخاب رنگ"
 }

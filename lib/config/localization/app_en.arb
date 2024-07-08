@@ -29,5 +29,8 @@
     "providerExampleScreenText": "Provider Example Screen",
     "settingsScreenText": "Settings Screen",
     "refreshText": "Refresh",
-    "loadingMoreText": "Loading more..."
+    "loadingMoreText": "Loading more...",
+    "changeAppColor": "Change app color",
+    "pickAColor": "Pick a color",
+    "applyColor": "Apply color"
 }

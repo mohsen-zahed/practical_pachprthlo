@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 
 class AppTheme {
-  static ThemeData lightTheme() {
+  static ThemeData lightTheme({Color? primaryColor, Color? secondaryColor}) {
     return ThemeData(
-      colorSchemeSeed: kPurpleColor,
+      primaryColor: primaryColor ?? kPrimaryColor,
       brightness: Brightness.light,
       scaffoldBackgroundColor: kWhiteColor,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         elevation: 0.0,
         foregroundColor: kWhiteColor,
-        backgroundColor: kPurpleColor,
+        backgroundColor: primaryColor ?? kPrimaryColor,
       ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: kWhiteColor,
-        backgroundColor: kPurpleColor,
+        backgroundColor: secondaryColor ?? kSecondaryColor,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 10,
         backgroundColor: kRedColor,
-        selectedItemColor: kPurpleColor,
+        selectedItemColor: primaryColor ?? kPrimaryColor,
         unselectedItemColor: kGreyColorShade800,
       ),
       cardTheme: CardTheme(
@@ -27,11 +27,11 @@ class AppTheme {
         elevation: 5,
         shadowColor: kBlackColorOp5,
       ),
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: kWhiteColor,
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: primaryColor ?? kPrimaryColor,
         elevation: 10,
         showCloseIcon: true,
-        contentTextStyle: TextStyle(color: kBlackColor),
+        contentTextStyle: const TextStyle(color: kWhiteColor),
       ),
       listTileTheme: ListTileThemeData(tileColor: kGreyColorShade300),
       bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kWhiteColor),
@@ -48,22 +48,22 @@ class AppTheme {
     );
   }
 
-  static ThemeData darkTheme() {
+  static ThemeData darkTheme({Color? primaryColor, Color? secondaryColor}) {
     return ThemeData(
-      colorSchemeSeed: kPurpleColor,
+      primaryColor: primaryColor ?? kPrimaryColor,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: kGreyColorShade900,
       appBarTheme: AppBarTheme(
         elevation: 0.0,
         foregroundColor: kWhiteColor,
-        backgroundColor: kPurpleColor.withOpacity(0.5),
+        backgroundColor: primaryColor?.withOpacity(0.5) ?? kPrimaryColor.withOpacity(0.5),
       ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: kWhiteColor,
-        backgroundColor: kPurpleColor,
+        backgroundColor: primaryColor ?? kPrimaryColor,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: kPurpleColor,
+        selectedItemColor: primaryColor ?? kPrimaryColor,
         backgroundColor: kGreyColorShade900,
         unselectedItemColor: kWhiteColor60,
       ),

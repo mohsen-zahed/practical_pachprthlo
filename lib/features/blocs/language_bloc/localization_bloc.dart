@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/features/data/models/a-language_model/language_model.dart';
 import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences.dart';
+import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 
 part 'localization_event.dart';
 part 'localization_state.dart';
@@ -13,16 +14,16 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
   }
 
   _onChangeLanguage(ChangeLocalization event, Emitter<LocalizationState> emit) async {
-    await MySharedPreferences.instance.storeLanguage(event.selectedLanguage.locale.languageCode);
+    await MySharedPreferences.instance.storeToSharedPreferences(languageKey, event.selectedLanguage.locale.languageCode);
     emit((state.copyWith(selectedLanguage: event.selectedLanguage)));
   }
 
   _onGetLanguage(GetLocalization event, Emitter<LocalizationState> emit) async {
-    final String? selectedLanguage = await MySharedPreferences.instance.getLanguage();
+    final String? selectedLanguage = await MySharedPreferences.instance.getFromSharedPreferences(languageKey);
     emit(
       state.copyWith(
         selectedLanguage: selectedLanguage != null
-            ? Languages.values.where((element) => element.locale.languageCode == selectedLanguage).toList().first
+            ? Languages.values.firstWhere((element) => element.locale.languageCode == selectedLanguage, orElse: () => Languages.persian)
             : Languages.persian,
       ),
     );

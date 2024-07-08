@@ -1,4 +1,3 @@
-import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
@@ -9,23 +8,13 @@ class MySharedPreferences {
     return _instance!;
   }
 
-  Future<void> storeLanguage(String languageCode) async {
+  Future<void> storeToSharedPreferences(String key, String value) async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(languageKey, languageCode);
+    await sharedPreferences.setString(key, value);
   }
 
-  Future<String?> getLanguage() async {
+  Future<String?> getFromSharedPreferences(String key) async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(languageKey);
-  }
-
-  Future<void> storeTheme(String theme) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(themeKey, theme);
-  }
-
-  Future<String?> getTheme() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(themeKey);
+    return sharedPreferences.getString(key);
   }
 }
