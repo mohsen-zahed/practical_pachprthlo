@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_statistic_repository.dart';
+import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/packages/fl_chart_package/my_fl_chart_package.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
+import 'package:practical_pachprthlo/widgets/custom_try_again_button.dart';
 
 class StatisticScreen extends StatelessWidget {
   const StatisticScreen({super.key});
@@ -82,13 +84,19 @@ class StatisticScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Icon(
+                      Icons.wifi_off_rounded,
+                      color: context.watch<ColorProvider>().primaryColor.withOpacity(0.2),
+                      size: getScreenArea(context, 0.0004),
+                    ),
                     Text(newFailedState.errorMessage),
                     SizedBox(height: getScreenArea(context, 0.00003)),
-                    ElevatedButton(
-                      onPressed: () {
+                    SizedBox(height: getScreenArea(context, 0.00006)),
+                    CustomTryAgainButton(
+                      buttonText: AppLocalizations.of(context)!.refreshText,
+                      onTap: () {
                         context.read<StatisticBloc>().add(StatisticRequested());
                       },
-                      child: Text(AppLocalizations.of(context)!.refreshText),
                     ),
                   ],
                 ),
@@ -111,13 +119,21 @@ class StatisticScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Icon(
+                      Icons.crisis_alert_rounded,
+                      color: context.watch<ColorProvider>().primaryColor.withOpacity(0.2),
+                      size: getScreenArea(context, 0.0004),
+                    ),
                     Text("${AppLocalizations.of(context)!.somethingWentWrongText}\n${AppLocalizations.of(context)!.tryToRefreshTheScreenText}"),
                     SizedBox(height: getScreenArea(context, 0.00003)),
                     ElevatedButton(
                       onPressed: () {
                         context.read<StatisticBloc>().add(StatisticRequested());
                       },
-                      child: Text(AppLocalizations.of(context)!.refreshText),
+                      child: Text(
+                        AppLocalizations.of(context)!.refreshText,
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(color: kWhiteColor),
+                      ),
                     ),
                   ],
                 ),

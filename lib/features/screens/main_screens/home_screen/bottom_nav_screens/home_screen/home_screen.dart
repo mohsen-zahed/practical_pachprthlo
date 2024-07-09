@@ -8,11 +8,13 @@ import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
+import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/search_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
+import 'package:practical_pachprthlo/widgets/custom_try_again_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -105,18 +107,26 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state.diseasesState is DiseasesFailed) {
             final error = state.diseasesState as DiseasesFailed;
             //* Failure state...
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.wifi_off_rounded, color: kGreyColorShade600, size: getScreenArea(context, 0.0004)),
-                Center(child: Text(error.errorMessage)),
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<DiseaseBloc>().add(FetchDiseases());
-                  },
-                  child: Text(AppLocalizations.of(context)!.tryAgainText),
-                ),
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.wifi_off_rounded,
+                    color: context.watch<ColorProvider>().primaryColor.withOpacity(0.2),
+                    size: getScreenArea(context, 0.0004),
+                  ),
+                  Text(error.errorMessage),
+                  SizedBox(height: getScreenArea(context, 0.00006)),
+                  CustomTryAgainButton(
+                    buttonText: AppLocalizations.of(context)!.tryAgainText,
+                    onTap: () {
+                      context.read<DiseaseBloc>().add(FetchDiseases());
+                    },
+                  ),
+                ],
+              ),
             );
           }
           if (state.diseasesState is DiseasesLoading) {

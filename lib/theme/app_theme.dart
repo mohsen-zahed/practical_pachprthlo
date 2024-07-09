@@ -47,6 +47,16 @@ class AppTheme {
           iconColor: WidgetStateProperty.all(kWhiteColor),
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: const WidgetStatePropertyAll(kWhiteColor),
+            backgroundColor: WidgetStatePropertyAll(primaryColor ?? kPrimaryColor),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            )),
+      ),
       textTheme: lightTextTheme,
     );
   }
