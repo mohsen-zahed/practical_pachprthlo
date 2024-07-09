@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
-import 'package:practical_pachprthlo/features/data/providers/disease_data_provider.dart';
+import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 
 part 'diseases_event.dart';
 part 'diseases_state.dart';

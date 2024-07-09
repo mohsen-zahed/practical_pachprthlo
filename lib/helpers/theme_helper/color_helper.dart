@@ -8,28 +8,30 @@ import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 class ColorHelper {
   //* Don't know why throws constructor exception while setting constructor as private...
   // ColorHelper._();
-  static void showColorPicker(BuildContext context) {
+  static void showColorPicker(BuildContext context, bool isPrimary) {
     MaterialColor? pickedColor;
     showDialog(
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.pickAColor),
+        title: Text(AppLocalizations.of(context)!.pickAColorText),
         content: SingleChildScrollView(
           child: BlockPicker(
-            pickerColor: kPrimaryColor,
+            pickerColor: isPrimary ? kPrimaryColor : kSecondaryColor,
             onColorChanged: (Color newColor) {
               if (newColor is MaterialColor) {
                 pickedColor = newColor;
-                context.read<ColorProvider>().updatePrimaryColor(newColor);
+                isPrimary ? context.read<ColorProvider>().updatePrimaryColor(newColor) : context.read<ColorProvider>().updateSecondaryColor(newColor);
               }
             },
           ),
         ),
         actions: <Widget>[
           ElevatedButton(
-            child: Text(AppLocalizations.of(context)!.applyColor),
+            child: Text(AppLocalizations.of(context)!.applyColorText),
             onPressed: () {
               if (pickedColor != null) {
-                context.read<ColorProvider>().updatePrimaryColor(pickedColor!);
+                isPrimary
+                    ? context.read<ColorProvider>().updatePrimaryColor(pickedColor!)
+                    : context.read<ColorProvider>().updateSecondaryColor(pickedColor!);
               }
               Navigator.of(context).pop();
             },

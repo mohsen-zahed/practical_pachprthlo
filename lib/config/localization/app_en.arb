@@ -30,7 +30,8 @@
     "settingsScreenText": "Settings Screen",
     "refreshText": "Refresh",
     "loadingMoreText": "Loading more...",
-    "changeAppColor": "Change app color",
-    "pickAColor": "Pick a color",
-    "applyColor": "Apply color"
+    "changeAppColorText": "Change app color",
+    "pickAColorText": "Pick a color",
+    "applyColorText": "Apply color",
+    "pickAColorTitleText": "Color picker"
 }

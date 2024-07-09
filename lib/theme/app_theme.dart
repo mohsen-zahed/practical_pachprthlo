@@ -33,7 +33,10 @@ class AppTheme {
         showCloseIcon: true,
         contentTextStyle: const TextStyle(color: kWhiteColor),
       ),
-      listTileTheme: ListTileThemeData(tileColor: kGreyColorShade300),
+      listTileTheme: ListTileThemeData(
+        tileColor: primaryColor?.withOpacity(0.2) ?? kPrimaryColor.withOpacity(0.2),
+        iconColor: primaryColor ?? kPrimaryColor,
+      ),
       bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kWhiteColor),
       expansionTileTheme: const ExpansionTileThemeData(
         collapsedBackgroundColor: kWhiteColor,
@@ -60,7 +63,7 @@ class AppTheme {
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: kWhiteColor,
-        backgroundColor: primaryColor ?? kPrimaryColor,
+        backgroundColor: secondaryColor ?? kSecondaryColor,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: primaryColor ?? kPrimaryColor,
@@ -78,6 +81,7 @@ class AppTheme {
       listTileTheme: ListTileThemeData(
         tileColor: kGreyColorShade800,
         textColor: kWhiteColor,
+        iconColor: primaryColor ?? kPrimaryColor,
       ),
       bottomSheetTheme: BottomSheetThemeData(backgroundColor: kGreyColorShade900),
       expansionTileTheme: ExpansionTileThemeData(
@@ -87,34 +91,6 @@ class AppTheme {
       textTheme: darkTextTheme,
     );
   }
-
-  static TextTheme lightTextTheme = const TextTheme(
-    displayLarge: TextStyle(
-      fontSize: 32.0,
-      fontWeight: FontWeight.w800,
-      color: Colors.black,
-    ),
-    displayMedium: TextStyle(
-      fontSize: 21.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
-    ),
-    displaySmall: TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black,
-    ),
-    titleLarge: TextStyle(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black,
-    ),
-    bodyLarge: TextStyle(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
-    ),
-  );
 
   static TextTheme darkTextTheme = const TextTheme(
     displayLarge: TextStyle(
@@ -141,6 +117,34 @@ class AppTheme {
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
+    ),
+  );
+
+  static TextTheme lightTextTheme = const TextTheme(
+    displayLarge: TextStyle(
+      fontSize: 32.0,
+      fontWeight: FontWeight.w800,
+      color: Colors.black,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 21.0,
+      fontWeight: FontWeight.w700,
+      color: Colors.black,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+    ),
+    titleLarge: TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w700,
+      color: Colors.black,
     ),
   );
 }

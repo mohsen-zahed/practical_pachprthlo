@@ -30,7 +30,8 @@
     "settingsScreenText": "تنظیمات",
     "refreshText": "تازه سازی",
     "loadingMoreText": "در حال بارگیری بیشتر...",
-    "changeAppColor": "تغییر رنگ برنامه",
-    "pickAColor": "رنگ مورد نظر را انتخاب کنید",
-    "applyColor": "انتخاب رنگ"
+    "changeAppColorText": "تغییر رنگ برنامه",
+    "pickAColorText": "رنگ مورد نظر را انتخاب کنید",
+    "applyColorText": "انتخاب رنگ",
+    "pickAColorTitleText": "انتخاب رنگ برنامه"
 }

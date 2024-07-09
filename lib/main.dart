@@ -10,8 +10,7 @@ import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/b
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/main_home_screen.dart';
 import 'package:practical_pachprthlo/features/providers/counter_provider.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
-import 'package:practical_pachprthlo/packages/flutter_colorpicker_package/my_flutter_colorpicker_package_const.dart';
-import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
+// import 'package:practical_pachprthlo/packages/flutter_colorpicker_package/my_flutter_colorpicker_package_const.dart';
 import 'package:practical_pachprthlo/theme/app_theme.dart';
 
 import 'package:provider/provider.dart';
@@ -27,10 +26,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupDi();
   final x = await SharedPreferences.getInstance();
-  print("lang: ${x.getString(languageKey)}");
-  // x.clear();
-  print("theme: ${x.getString(themeKey)}");
-  print("color: ${x.getString(primaryColorKey)}");
+  x.clear();
   runApp(const MyApp());
 }
 
@@ -70,8 +66,14 @@ class MyApp extends StatelessWidget {
                   builder: (context, themeState) {
                     return MaterialApp(
                       title: 'Practical pachprthlo',
-                      theme: AppTheme.lightTheme(primaryColor: color.primaryColor),
-                      darkTheme: AppTheme.darkTheme(primaryColor: color.primaryColor),
+                      theme: AppTheme.lightTheme(
+                        primaryColor: color.primaryColor,
+                        secondaryColor: color.secondaryColor,
+                      ),
+                      darkTheme: AppTheme.darkTheme(
+                        primaryColor: color.primaryColor,
+                        secondaryColor: color.secondaryColor,
+                      ),
                       themeMode: themeState.selectedTheme.themeMode,
                       debugShowCheckedModeBanner: false,
                       supportedLocales: AppLocalizations.supportedLocales,

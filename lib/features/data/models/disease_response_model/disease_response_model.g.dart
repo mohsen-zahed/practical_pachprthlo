@@ -37,7 +37,10 @@ class DiseaseResponseModelAdapter extends TypeAdapter<DiseaseResponseModel> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is DiseaseResponseModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is DiseaseResponseModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class InfoModelAdapter extends TypeAdapter<InfoModel> {
@@ -76,7 +79,11 @@ class InfoModelAdapter extends TypeAdapter<InfoModel> {
   int get hashCode => typeId.hashCode;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is InfoModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is InfoModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class DiseaseModelAdapter extends TypeAdapter<DiseaseModel> {
@@ -134,5 +141,8 @@ class DiseaseModelAdapter extends TypeAdapter<DiseaseModel> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is DiseaseModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is DiseaseModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

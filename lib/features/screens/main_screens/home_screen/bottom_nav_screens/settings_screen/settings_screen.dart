@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
+import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/color_bottom_sheet_modal.dart';
 
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/localization_bottom_sheet_modal.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/theme_bottom_sheet_modal.dart';
-import 'package:practical_pachprthlo/helpers/theme_helper/color_helper.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -77,10 +77,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ListTile(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 onTap: () {
-                  ColorHelper.showColorPicker(context);
+                  showModalBottomSheet(
+                    showDragHandle: true,
+                    context: context,
+                    builder: (context) {
+                      return const ColorBottomSheetModal();
+                    },
+                  );
                 },
                 leading: const Icon(Icons.colorize_rounded),
-                title: Text(AppLocalizations.of(context)!.changeAppColor),
+                title: Text(AppLocalizations.of(context)!.changeAppColorText),
                 trailing: Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: getScreenArea(context, 0.00005),

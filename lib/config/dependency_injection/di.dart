@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
 import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
-import 'package:practical_pachprthlo/features/data/providers/disease_data_provider.dart';
+import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 import 'package:practical_pachprthlo/features/data/repository/locale/locale_disease_repository.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_disease_repository.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_statistic_repository.dart';

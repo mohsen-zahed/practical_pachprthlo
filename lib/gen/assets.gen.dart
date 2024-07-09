@@ -13,15 +13,24 @@ class Assets {
   Assets._();
 
   static const AssetGenImage afgFlag = AssetGenImage('assets/afg_flag.png');
+  static const AssetGenImage colorIcon = AssetGenImage('assets/color_icon.png');
   static const AssetGenImage darkModeIcon =
       AssetGenImage('assets/dark_mode_icon.png');
   static const AssetGenImage engFlag = AssetGenImage('assets/eng_flag.png');
   static const AssetGenImage lightModeIcon =
       AssetGenImage('assets/light_mode_icon.png');
+  static const AssetGenImage systemModeIcon =
+      AssetGenImage('assets/system_mode_icon.png');
 
   /// List of all assets
-  static List<AssetGenImage> get values =>
-      [afgFlag, darkModeIcon, engFlag, lightModeIcon];
+  static List<AssetGenImage> get values => [
+        afgFlag,
+        colorIcon,
+        darkModeIcon,
+        engFlag,
+        lightModeIcon,
+        systemModeIcon
+      ];
 }
 
 class AssetGenImage {
