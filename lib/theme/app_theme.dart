@@ -89,7 +89,7 @@ class AppTheme {
         contentTextStyle: const TextStyle(color: kWhiteColor),
       ),
       listTileTheme: ListTileThemeData(
-        tileColor: kGreyColorShade800,
+        tileColor: primaryColor?.withOpacity(0.2) ?? kPrimaryColor.withOpacity(0.2),
         textColor: kWhiteColor,
         iconColor: primaryColor ?? kPrimaryColor,
       ),
@@ -97,6 +97,19 @@ class AppTheme {
       expansionTileTheme: ExpansionTileThemeData(
         collapsedBackgroundColor: kGreyColorShade800,
         backgroundColor: kGreyColorShade800,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: const WidgetStatePropertyAll(kWhiteColor),
+          backgroundColor: WidgetStatePropertyAll(
+            primaryColor?.withOpacity(0.5) ?? kPrimaryColor.withOpacity(0.5),
+          ),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
       ),
       textTheme: darkTextTheme,
     );
