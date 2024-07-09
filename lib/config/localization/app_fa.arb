@@ -33,5 +33,10 @@
     "changeAppColorText": "تغییر رنگ برنامه",
     "pickAColorText": "رنگ مورد نظر را انتخاب کنید",
     "applyColorText": "انتخاب رنگ",
-    "pickAColorTitleText": "انتخاب رنگ برنامه"
+    "pickAColorTitleText": "انتخاب رنگ برنامه",
+    "somethingWentWrongPleaseTryAgainInTheNext24HoursText": "خطایی رخ داده است، لطفا بعدا تلاش کنید!",
+    "pleaseCheckYourNetworkAndTryAgainText": "اتصال به اینترنت را چک نموده و دوباره تلاش کنید!",
+    "requestTimedOutTryAgainLaterText": "درخواست ناموفق، دوباره تلاش کنید!",
+    "thereIsAnUnknownProblemKeepingYouFromSendingRequestsText": "خطایی رخ داده است، بعدا تلاش کنید!",
+    "somethingWentWrong": "خطایی نامشخص رخ داده است، بعدا تلاش کنید!"
 }

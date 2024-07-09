@@ -33,5 +33,10 @@
     "changeAppColorText": "Change app color",
     "pickAColorText": "Pick a color",
     "applyColorText": "Apply color",
-    "pickAColorTitleText": "Color picker"
+    "pickAColorTitleText": "Color picker",
+    "somethingWentWrongPleaseTryAgainInTheNext24Hours!Text": "Something went wrong, please try again in the next 24 hours!",
+    "pleaseCheckYourNetworkAndTryAgain!Text": "Please check your network and try again!",
+    "requestTimedOutTryAgainLater!Text": "Request timed out, try again later!",
+    "thereIsAnUnknownProblemKeepingYouFromSendingRequests!Text": "There is an unknown problem keeping you from sending requests!",
+    "somethingWentWrong!": "Something went wrong!"
 }

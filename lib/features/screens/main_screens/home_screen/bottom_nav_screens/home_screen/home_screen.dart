@@ -106,8 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
             final error = state.diseasesState as DiseasesFailed;
             //* Failure state...
             return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error, size: getScreenArea(context, 0.00005)),
+                Icon(Icons.wifi_off_rounded, color: kGreyColorShade600, size: getScreenArea(context, 0.0004)),
                 Center(child: Text(error.errorMessage)),
                 ElevatedButton(
                   onPressed: () {

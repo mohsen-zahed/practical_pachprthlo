@@ -14,7 +14,7 @@ import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/theme/app_theme.dart';
 
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 ///*** ************************************************* ***\\\
 //* This is a project for testing, a combination of *\\
@@ -25,8 +25,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupDi();
-  final x = await SharedPreferences.getInstance();
-  x.clear();
+  // final x = await SharedPreferences.getInstance();
+  // x.clear();
   runApp(const MyApp());
 }
 

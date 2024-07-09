@@ -33,9 +33,24 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
           ));
         }
       } on DioException catch (e) {
-        emit(state.copyWith(
-          diseasesState: DiseasesFailed(errorMessage: e.message.toString()),
-        ));
+        if (e.type == DioExceptionType.badResponse) {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Something went wrong, please try again in the next 24 hours!')));
+          debugPrint('BadResponse message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.connectionError) {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Please check your network and try again!')));
+          debugPrint('ConnectionError message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.connectionTimeout) {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Request timed out, try again later!')));
+          debugPrint('ConnectionTimeout message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.sendTimeout) {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Request timed out, try again later!')));
+          debugPrint('SendTimeout message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.unknown) {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'There is an unknown problem keeping you from sending requests!')));
+          debugPrint('Unknown message: ${e.message.toString()}');
+        } else {
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Something went wrong!')));
+        }
       }
     });
 

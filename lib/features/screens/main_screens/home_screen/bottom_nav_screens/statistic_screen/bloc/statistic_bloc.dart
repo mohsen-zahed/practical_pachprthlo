@@ -17,7 +17,24 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticStatus> {
         final result = await iStatisticRepository.fetchStatistics();
         emit(state.copyWith(statisticState: StatisticSuccess(statisticList: result)));
       } on DioException catch (e) {
-        emit(state.copyWith(statisticState: StatisticFailed(errorMessage: e.message.toString())));
+        if (e.type == DioExceptionType.badResponse) {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'Something went wrong, please try again in the next 24 hours!')));
+          debugPrint('BadResponse message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.connectionError) {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'Please check your network and try again!')));
+          debugPrint('ConnectionError message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.connectionTimeout) {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'Request timed out, try again later!')));
+          debugPrint('ConnectionTimeout message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.sendTimeout) {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'Request timed out, try again later!')));
+          debugPrint('SendTimeout message: ${e.message.toString()}');
+        } else if (e.type == DioExceptionType.unknown) {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'There is an unknown problem keeping you from sending requests!')));
+          debugPrint('Unknown message: ${e.message.toString()}');
+        } else {
+          emit(state.copyWith(statisticState: const StatisticFailed(errorMessage: 'Something went wrong!')));
+        }
       }
     });
   }
