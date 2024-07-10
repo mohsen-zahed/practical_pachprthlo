@@ -108,7 +108,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   );
                 },
-                leading: const Icon(Icons.colorize_rounded),
+                leading: const Icon(Icons.font_download_rounded),
                 title: Text(AppLocalizations.of(context)!.appFontText),
                 trailing: Icon(
                   Icons.arrow_forward_ios_rounded,

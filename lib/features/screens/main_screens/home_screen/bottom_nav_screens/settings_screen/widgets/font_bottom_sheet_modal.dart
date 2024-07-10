@@ -57,11 +57,14 @@ class _FontBottomSheetModalState extends State<FontBottomSheetModal> {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.00003)),
-                            child: Text(fontsList[index]),
+                            child: Text(
+                              fontsList[index],
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
                           SizedBox(height: getScreenArea(context, 0.000012)),
                           ListTile(
-                            leading: Icon(Icons.font_download),
+                            leading: const Icon(Icons.font_download_rounded),
                             // Container(
                             //   width: getScreenArea(context, 0.0001),
                             //   height: getScreenArea(context, 0.0001),
@@ -74,7 +77,10 @@ class _FontBottomSheetModalState extends State<FontBottomSheetModal> {
                             onTap: () async {
                               context.read<FontProvider>().updateFontFamily(fontsList[index], 18);
                             },
-                            title: Text('This is a sample of this font!'),
+                            title: Text(
+                              "${AppLocalizations.of(context)!.thisIsASampleOfText} ${fontsList[index]}",
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(fontFamily: fontsList[index]),
+                            ),
                           ),
                         ],
                       ),

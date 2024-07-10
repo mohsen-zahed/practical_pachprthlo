@@ -40,5 +40,6 @@
     "thereIsAnUnknownProblemKeepingYouFromSendingRequestsText": "There is an unknown problem keeping you from sending requests!",
     "somethingWentWrongTryAgainText": "Something went wrong!",
     "appFontText": "App's font",
-    "changeDisplayFontText": "Change display font"
+    "changeDisplayFontText": "Change display font",
+    "thisIsASampleOfText": "This is a sample of"
 }

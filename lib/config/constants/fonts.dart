@@ -1,3 +1,3 @@
 //* Default font...
-const String defaultAppFont = 'FridayCute';
+const String defaultAppFont = 'Helvitca';
 const double defaultAppFontSize = 32;
