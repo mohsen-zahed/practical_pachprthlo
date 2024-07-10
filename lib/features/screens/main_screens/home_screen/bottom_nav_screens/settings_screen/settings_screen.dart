@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
+import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
+import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
+import 'package:practical_pachprthlo/features/providers/color_provider.dart';
+import 'package:practical_pachprthlo/features/providers/font_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/color_bottom_sheet_modal.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/font_bottom_sheet_modal.dart';
 
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/localization_bottom_sheet_modal.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/widgets/theme_bottom_sheet_modal.dart';
+import 'package:practical_pachprthlo/helpers/pop_up_helpers/confirmation_pop_up_box.dart';
+import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -29,6 +36,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            TextButton(
+              onPressed: () {
+                showConfirmationDialogBox(
+                  context,
+                  '',
+                  titleText: AppLocalizations.of(context)!.resetBackToDefaultText,
+                  onConfirm: () {
+                    context.read<ThemeBloc>().add(const ResetThemeMode(key: themeKey));
+                    context.read<LocalizationBloc>().add(const ResetLocalization(key: languageKey));
+                    context.read<ColorProvider>().resetThemeColors();
+                    context.read<FontProvider>().resetFontFamily();
+                  },
+                  onCancel: () {},
+                );
+              },
+              child: Text(
+                AppLocalizations.of(context)!.resetAllText,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(color: context.watch<ColorProvider>().primaryColor),
+              ),
+            ),
+            SizedBox(height: getScreenArea(context, 0.00005)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.0001)),
               child: ListTile(

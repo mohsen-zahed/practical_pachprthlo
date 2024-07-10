@@ -9,12 +9,17 @@ class MySharedPreferences {
   }
 
   Future<void> storeToSharedPreferences(String key, String value) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(key, value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
   }
 
   Future<String?> getFromSharedPreferences(String key) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(key);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key);
+  }
+
+  Future<bool> removeFromSharedPreferences(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return await prefs.remove(key);
   }
 }

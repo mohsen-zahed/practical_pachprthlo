@@ -31,6 +31,14 @@ class FontProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> resetFontFamily() async {
+    await MySharedPreferences.instance.removeFromSharedPreferences(fontFamilyKey);
+    await MySharedPreferences.instance.removeFromSharedPreferences(fontFamilySizeKey);
+    fontFamily = defaultAppFont;
+    fontFamilySize = defaultAppFontSize;
+    notifyListeners();
+  }
+
   Future<void> getFontFamily() async {
     final String? fontFamily = await MySharedPreferences.instance.getFromSharedPreferences(fontFamilyKey);
     if (fontFamily != null) {

@@ -41,5 +41,10 @@
     "somethingWentWrongTryAgainText": "Something went wrong!",
     "appFontText": "App's font",
     "changeDisplayFontText": "Change display font",
-    "thisIsASampleOfText": "This is a sample of"
+    "thisIsASampleOfText": "This is a sample of",
+    "fontSuccessfullyChangedToText": "Font successfully changed to",
+    "yesText": "Yes",
+    "noText": "No",
+    "resetBackToDefaultText": "Reset back to default?",
+    "resetAllText": "Reset all"
 }

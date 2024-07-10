@@ -89,6 +89,7 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: kGreyColorShade900,
         showCloseIcon: true,
+        closeIconColor: kWhiteColor,
         contentTextStyle: const TextStyle(color: kWhiteColor),
       ),
       listTileTheme: ListTileThemeData(

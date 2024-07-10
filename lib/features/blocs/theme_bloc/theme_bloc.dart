@@ -11,10 +11,16 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(const ThemeState()) {
     on<ChangeThemeMode>(_onChangeThemeMode);
     on<GetTheme>(_onGetTheme);
+    on<ResetThemeMode>(_onResetThemeMode);
   }
   _onChangeThemeMode(ChangeThemeMode event, Emitter<ThemeState> emit) async {
     await MySharedPreferences.instance.storeToSharedPreferences(themeKey, event.selectedTheme.name);
     emit((state.copyWith(selectedTheme: event.selectedTheme)));
+  }
+
+  _onResetThemeMode(ResetThemeMode event, Emitter<ThemeState> emit) async {
+    await MySharedPreferences.instance.removeFromSharedPreferences(event.key);
+    emit((state.copyWith(selectedTheme: Themes.system)));
   }
 
   _onGetTheme(GetTheme event, Emitter<ThemeState> emit) async {

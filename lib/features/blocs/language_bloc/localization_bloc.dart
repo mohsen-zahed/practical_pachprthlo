@@ -11,11 +11,17 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
   LocalizationBloc() : super(const LocalizationState()) {
     on<ChangeLocalization>(_onChangeLanguage);
     on<GetLocalization>(_onGetLanguage);
+    on<ResetLocalization>(_onResetLocalization);
   }
 
   _onChangeLanguage(ChangeLocalization event, Emitter<LocalizationState> emit) async {
     await MySharedPreferences.instance.storeToSharedPreferences(languageKey, event.selectedLanguage.locale.languageCode);
     emit((state.copyWith(selectedLanguage: event.selectedLanguage)));
+  }
+
+  _onResetLocalization(ResetLocalization event, Emitter<LocalizationState> emit) async {
+    await MySharedPreferences.instance.removeFromSharedPreferences(event.key);
+    emit((state.copyWith(selectedLanguage: Languages.persian)));
   }
 
   _onGetLanguage(GetLocalization event, Emitter<LocalizationState> emit) async {

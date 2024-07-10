@@ -16,4 +16,12 @@ class ChangeLocalization extends LocalizationEvent {
   List<Object> get props => [selectedLanguage];
 }
 
+class ResetLocalization extends LocalizationEvent {
+  final String key;
+
+  const ResetLocalization({required this.key});
+  @override
+  List<Object> get props => [key];
+}
+
 class GetLocalization extends LocalizationEvent {}

@@ -42,4 +42,12 @@ class ColorProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> resetThemeColors() async {
+    await MySharedPreferences.instance.removeFromSharedPreferences(secondaryColorKey);
+    await MySharedPreferences.instance.removeFromSharedPreferences(primaryColorKey);
+    primaryColor = kPrimaryColor;
+    secondaryColor = kSecondaryColor;
+    notifyListeners();
+  }
 }

@@ -2,25 +2,25 @@ enum FontModel {
   bTitrFont(
     'BTitr',
     'assets/images/icons/font_icons/font_icon.png',
-    32,
+    24,
     'B Titr',
   ),
   exarrosFont(
     'Exarros',
     'assets/images/icons/font_icons/font_icon.png',
-    16,
+    20,
     'Exarros',
   ),
   helvitcaFont(
     'Helvitca',
     'assets/images/icons/font_icons/font_icon.png',
-    16,
+    24,
     'Helvitca',
   ),
   fridayCuteFont(
     'FridayCute',
     'assets/images/icons/font_icons/font_icon.png',
-    16,
+    24,
     'FridayCute',
   );
 
