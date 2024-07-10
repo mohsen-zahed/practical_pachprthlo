@@ -8,11 +8,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.3.4 <4.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.6
   # Dio
@@ -74,10 +72,17 @@ flutter:
     - assets/
   #   - images/a_dot_ham.jpeg
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Exarros
+      fonts:
+        - asset: assets/fonts/en-exarros.ttf
+          style: italic
+          weight: 800
+    - family: Helvitca
+      fonts:
+        - asset: assets/fonts/en-helvitca-regular.ttf
+          style: italic
+          weight: 800
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

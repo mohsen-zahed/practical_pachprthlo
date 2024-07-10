@@ -5,6 +5,7 @@ import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_b
 import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/providers/color_provider.dart';
+import 'package:practical_pachprthlo/features/providers/font_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/main_home_screen.dart';
@@ -55,31 +56,36 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CounterProvider()),
           ChangeNotifierProvider(create: (context) => CategoriesProvider()),
           ChangeNotifierProvider(create: (context) => ColorProvider()),
+          ChangeNotifierProvider(create: (context) => FontProvider()),
         ],
-        child: Consumer<ColorProvider>(
-          builder: (context, color, child) {
-            return BlocBuilder<LocalizationBloc, LocalizationState>(
-              buildWhen: (previous, current) => previous.selectedLanguage != current.selectedLanguage,
-              builder: (context, languageState) {
-                return BlocBuilder<ThemeBloc, ThemeState>(
-                  buildWhen: (previous, current) => previous.selectedTheme != current.selectedTheme,
-                  builder: (context, themeState) {
-                    return MaterialApp(
-                      title: 'Practical pachprthlo',
-                      theme: AppTheme.lightTheme(
-                        primaryColor: color.primaryColor,
-                        secondaryColor: color.secondaryColor,
-                      ),
-                      darkTheme: AppTheme.darkTheme(
-                        primaryColor: color.primaryColor,
-                        secondaryColor: color.secondaryColor,
-                      ),
-                      themeMode: themeState.selectedTheme.themeMode,
-                      debugShowCheckedModeBanner: false,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      localizationsDelegates: AppLocalizations.localizationsDelegates,
-                      locale: languageState.selectedLanguage.locale,
-                      home: const MainHomeScreen(),
+        child: Consumer<FontProvider>(
+          builder: (context, font, child) {
+            return Consumer<ColorProvider>(
+              builder: (context, color, child) {
+                return BlocBuilder<LocalizationBloc, LocalizationState>(
+                  buildWhen: (previous, current) => previous.selectedLanguage != current.selectedLanguage,
+                  builder: (context, languageState) {
+                    return BlocBuilder<ThemeBloc, ThemeState>(
+                      buildWhen: (previous, current) => previous.selectedTheme != current.selectedTheme,
+                      builder: (context, themeState) {
+                        return MaterialApp(
+                          title: 'Practical pachprthlo',
+                          theme: AppTheme.lightTheme(
+                            primaryColor: color.primaryColor,
+                            secondaryColor: color.secondaryColor,
+                          ),
+                          darkTheme: AppTheme.darkTheme(
+                            primaryColor: color.primaryColor,
+                            secondaryColor: color.secondaryColor,
+                          ),
+                          themeMode: themeState.selectedTheme.themeMode,
+                          debugShowCheckedModeBanner: false,
+                          supportedLocales: AppLocalizations.supportedLocales,
+                          localizationsDelegates: AppLocalizations.localizationsDelegates,
+                          locale: languageState.selectedLanguage.locale,
+                          home: const MainHomeScreen(),
+                        );
+                      },
                     );
                   },
                 );

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 
 class AppTheme {
-  static ThemeData lightTheme({Color? primaryColor, Color? secondaryColor}) {
+  static ThemeData lightTheme({Color? primaryColor, Color? secondaryColor, String? fontFamily}) {
     return ThemeData(
+      fontFamily: 'Exarros',
       primaryColor: primaryColor ?? kPrimaryColor,
       brightness: Brightness.light,
       scaffoldBackgroundColor: kWhiteColor,
@@ -61,8 +62,9 @@ class AppTheme {
     );
   }
 
-  static ThemeData darkTheme({Color? primaryColor, Color? secondaryColor}) {
+  static ThemeData darkTheme({Color? primaryColor, Color? secondaryColor, String? fontFamily}){
     return ThemeData(
+      fontFamily: 'Exarros',
       primaryColor: primaryColor ?? kPrimaryColor,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: kGreyColorShade900,

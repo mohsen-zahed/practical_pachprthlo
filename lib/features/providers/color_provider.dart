@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/helpers/theme_helper/color_helper.dart';
-import 'package:practical_pachprthlo/packages/flutter_colorpicker_package/my_flutter_colorpicker_package_const.dart';
 import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences.dart';
+import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 
 class ColorProvider extends ChangeNotifier {
   Color primaryColor = kPrimaryColor;
