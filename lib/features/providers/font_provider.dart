@@ -1,46 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:practical_pachprthlo/config/constants/fonts.dart';
+import 'package:practical_pachprthlo/features/data/models/d-font_model/font_model.dart';
 import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences.dart';
 import 'package:practical_pachprthlo/packages/shared_preferences/my_shared_preferences_const.dart';
 
 class FontProvider extends ChangeNotifier {
-  String persianFont = 'B Titr';
-  double persianFontSize = 32;
-  String englishFont = 'Exarros';
-  double englishFontSize = 16;
+  String fontFamily;
+  double fontFamilySize;
+  List<String> persianFontsList = [
+    FontModel.bTitrFont.fontFamily,
+  ];
+  List<String> englishFontsList = [
+    FontModel.exarrosFont.fontFamily,
+    FontModel.helvitcaFont.fontFamily,
+    FontModel.fridayCuteFont.fontFamily,
+  ];
 
-  FontProvider() {
-    getPersianFont();
-    getEnglishFont();
+  FontProvider({
+    this.fontFamily = defaultAppFont,
+    this.fontFamilySize = defaultAppFontSize,
+  }) {
+    getFontFamily();
   }
 
-  Future<void> updatePersianFont(String fontName, double persianFontSize) async {
-    await MySharedPreferences.instance.storeToSharedPreferences(persianFontFamilyKey, fontName);
-    await MySharedPreferences.instance.storeToSharedPreferences(persianFontSizeKey, persianFontSize.toString());
-    persianFont = fontName;
-    persianFontSize = persianFontSize;
+  Future<void> updateFontFamily(String inputFontName, double inputFontFamilySize) async {
+    await MySharedPreferences.instance.storeToSharedPreferences(fontFamilyKey, inputFontName);
+    await MySharedPreferences.instance.storeToSharedPreferences(fontFamilySizeKey, inputFontFamilySize.toString());
+    fontFamily = inputFontName;
+    fontFamilySize = inputFontFamilySize;
     notifyListeners();
   }
 
-  Future<void> updateEnglishFont(String fontName, double englishFontSize) async {
-    await MySharedPreferences.instance.storeToSharedPreferences(englishFontFamilyKey, fontName);
-    await MySharedPreferences.instance.storeToSharedPreferences(englishFontSizeKey, englishFontSize.toString());
-    englishFont = fontName;
-    englishFontSize = englishFontSize;
-    notifyListeners();
-  }
-
-  Future<void> getPersianFont() async {
-    final String? persianFont = await MySharedPreferences.instance.getFromSharedPreferences(persianFontFamilyKey);
-    if (persianFont != null) {
-      this.persianFont = persianFont;
-    }
-    notifyListeners();
-  }
-
-  Future<void> getEnglishFont() async {
-    final String? englishFont = await MySharedPreferences.instance.getFromSharedPreferences(englishFontFamilyKey);
-    if (englishFont != null) {
-      this.englishFont = englishFont;
+  Future<void> getFontFamily() async {
+    final String? fontFamily = await MySharedPreferences.instance.getFromSharedPreferences(fontFamilyKey);
+    if (fontFamily != null) {
+      this.fontFamily = fontFamily;
     }
     notifyListeners();
   }

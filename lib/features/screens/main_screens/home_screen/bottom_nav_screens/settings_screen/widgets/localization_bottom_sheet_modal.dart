@@ -27,7 +27,7 @@ class LocalizationBottomSheetModal extends StatelessWidget {
               itemBuilder: (context, index) {
                 return BlocBuilder<LocalizationBloc, LocalizationState>(
                   builder: (context, state) {
-                    final bool isLightThemeChosen = Languages.values[index] == state.selectedLanguage;
+                    final bool isLanguageChosen = Languages.values[index] == state.selectedLanguage;
                     return Padding(
                       padding: EdgeInsets.only(bottom: getScreenArea(context, 0.00003)),
                       child: ListTile(
@@ -40,7 +40,7 @@ class LocalizationBottomSheetModal extends StatelessWidget {
                           ),
                         ),
                         title: Text(Languages.values[index].name),
-                        trailing: Icon(isLightThemeChosen ? Icons.check_circle : Icons.circle_outlined),
+                        trailing: Icon(isLanguageChosen ? Icons.check_circle : Icons.circle_outlined),
                         onTap: () async {
                           context.read<LocalizationBloc>().add(ChangeLocalization(selectedLanguage: Languages.values[index]));
                           await Future.delayed(

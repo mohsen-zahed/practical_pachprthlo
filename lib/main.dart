@@ -73,10 +73,12 @@ class MyApp extends StatelessWidget {
                           theme: AppTheme.lightTheme(
                             primaryColor: color.primaryColor,
                             secondaryColor: color.secondaryColor,
+                            fontFamily: font.fontFamily,
                           ),
                           darkTheme: AppTheme.darkTheme(
                             primaryColor: color.primaryColor,
                             secondaryColor: color.secondaryColor,
+                            fontFamily: font.fontFamily,
                           ),
                           themeMode: themeState.selectedTheme.themeMode,
                           debugShowCheckedModeBanner: false,

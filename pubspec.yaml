@@ -77,12 +77,20 @@ flutter:
       fonts:
         - asset: assets/fonts/en-exarros.ttf
           style: italic
-          weight: 800
+          weight: 700
     - family: Helvitca
       fonts:
         - asset: assets/fonts/en-helvitca-regular.ttf
           style: italic
-          weight: 800
+          weight: 700
+    - family: BTitr
+      fonts:
+        - asset: assets/fonts/fa-b-titr-bold.ttf
+          weight: 700
+    - family: FridayCute
+      fonts:
+        - asset: assets/fonts/en-masa-friday-cute.otf
+          weight: 700
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

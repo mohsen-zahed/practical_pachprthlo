@@ -30,7 +30,7 @@
     "settingsScreenText": "Settings Screen",
     "refreshText": "Refresh",
     "loadingMoreText": "Loading more...",
-    "changeAppColorText": "Change app color",
+    "changeAppColorText": "Theme color",
     "pickAColorText": "Pick a color",
     "applyColorText": "Apply color",
     "pickAColorTitleText": "Color picker",
@@ -38,5 +38,7 @@
     "pleaseCheckYourNetworkAndTryAgainText": "Please check your network and try again!",
     "requestTimedOutTryAgainLaterText": "Request timed out, try again later!",
     "thereIsAnUnknownProblemKeepingYouFromSendingRequestsText": "There is an unknown problem keeping you from sending requests!",
-    "somethingWentWrongTryAgainText": "Something went wrong!"
+    "somethingWentWrongTryAgainText": "Something went wrong!",
+    "appFontText": "App's font",
+    "changeDisplayFontText": "Change display font"
 }

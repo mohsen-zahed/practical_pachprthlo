@@ -38,5 +38,7 @@
     "pleaseCheckYourNetworkAndTryAgainText": "اتصال به اینترنت را چک نموده و دوباره تلاش کنید!",
     "requestTimedOutTryAgainLaterText": "درخواست ناموفق، دوباره تلاش کنید!",
     "thereIsAnUnknownProblemKeepingYouFromSendingRequestsText": "خطایی رخ داده است، بعدا تلاش کنید!",
-    "somethingWentWrongTryAgainText": "خطایی نامشخص رخ داده است، بعدا تلاش کنید!"
+    "somethingWentWrongTryAgainText": "خطایی نامشخص رخ داده است، بعدا تلاش کنید!",
+    "appFontText":"فونت برنامه",
+    "changeDisplayFontText": "انتخاب فونت"
 }
