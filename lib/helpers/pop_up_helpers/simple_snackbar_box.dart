@@ -19,25 +19,13 @@ void simpleSnackBarBoxWidget<T>({
             duration: Duration(days: duration!),
             behavior: SnackBarBehavior.floating,
             showCloseIcon: showCloseButton,
-            content: Container(
-              height: 10,
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(title),
-              ),
-            ),
+            content: Center(child: Text(title)),
           )
         : SnackBar(
             backgroundColor: color ?? kGreenColor,
             behavior: SnackBarBehavior.floating,
             showCloseIcon: showCloseButton,
-            content: Container(
-              height: 10,
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(title),
-              ),
-            ),
+            content: Center(child: Text(title)),
           ),
   );
 }

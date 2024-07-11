@@ -41,15 +41,15 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
     if (currentSelectedTabNavigatorState.canPop()) {
       currentSelectedTabNavigatorState.pop();
-      return false; // Prevent default back navigation
+      return false; //* Prevents default back navigation
     } else if (_history.isNotEmpty) {
       setState(() {
         selectedScreenIndex = _history.last;
         _history.removeLast();
       });
-      return false; // Prevent default back navigation
+      return false; //* Prevents default back navigation
     } else {
-      return true; // Allow default back navigation (exits the app)
+      return true; //* Allows default back navigation (exits the app)
     }
   }
 
