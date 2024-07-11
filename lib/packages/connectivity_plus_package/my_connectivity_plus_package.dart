@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class MyConnectivityPlusPackage {
@@ -11,16 +13,27 @@ class MyConnectivityPlusPackage {
   Future<bool> checkInternetConnection() async {
     try {
       final List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
-      print('net res: $connectivityResult');
-      if (connectivityResult[0] == ConnectivityResult.mobile ||
-          connectivityResult[0] == ConnectivityResult.wifi ||
-          connectivityResult[0] == ConnectivityResult.vpn) {
-        return true;
-      } else {
-        return false;
-      }
+      return _updateConnectivityStatus(connectivityResult[0]);
     } catch (e) {
       return false;
     }
+  }
+
+  bool _updateConnectivityStatus(ConnectivityResult result) {
+    if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi || result == ConnectivityResult.vpn) {
+      trackConnectivityChanges();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // ignore: unused_field
+  late StreamSubscription<List<ConnectivityResult?>> _subscription;
+
+  void trackConnectivityChanges() {
+    _subscription = Connectivity().onConnectivityChanged.listen((event) {
+      _updateConnectivityStatus(event[0]);
+    });
   }
 }

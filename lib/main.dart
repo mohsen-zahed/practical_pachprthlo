@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
 import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
+import 'package:practical_pachprthlo/features/cubit/internet_cubit.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/features/providers/font_provider.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<LocalizationBloc>(
           create: (context) => di<LocalizationBloc>()..add(GetLocalization()),
         ),
+        BlocProvider<InternetCubit>(
+          create: (context) => di<InternetCubit>(),
+        )
       ],
       child: MultiProvider(
         providers: [

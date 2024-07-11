@@ -12,9 +12,11 @@ import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/search_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
+import 'package:practical_pachprthlo/helpers/pop_up_helpers/simple_snackbar_box.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 import 'package:practical_pachprthlo/widgets/custom_try_again_button.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,10 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
   StreamSubscription? _streamSubscription;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    super.dispose();
     _bloc?.close();
     _streamSubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -159,8 +166,12 @@ class _HomeScreenState extends State<HomeScreen> {
               (value) {
                 final String source = value ? AppLocalizations.of(context)!.apiText : AppLocalizations.of(context)!.databaseText;
                 String msg = "${AppLocalizations.of(context)!.dataRetrievedFromText} $source";
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(msg)),
+                simpleSnackBarBoxWidget(
+                  context: context,
+                  isInfinite: false,
+                  title: msg,
+                  color: Provider.of<ColorProvider>(context, listen: false).primaryColor,
+                  showCloseButton: true,
                 );
               },
             );
