@@ -12,6 +12,6 @@ class RemoteDiseaseDataSourceImp implements IRemoteDiseaseDataSource {
   RemoteDiseaseDataSourceImp(this.myDioPackage);
   @override
   Future<Response> getDiseaseList(int page) async {
-    return await myDioPackage.getData(dataUrl);
+    return await myDioPackage.getData(dataUrl, queryParameters: {'page': page});
   }
 }

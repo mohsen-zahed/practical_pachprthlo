@@ -107,7 +107,8 @@ class _SearchScreenState extends State<SearchScreen> {
               //* Search works according to name and species.
               //* Species is located on the card image as a badge...
               //* The name is an image credit tag on the card image and Expansion Tile's title...
-              return element.species.toLowerCase().contains(value.trim().toLowerCase()) ||
+              return element.name.toLowerCase().contains(value.trim().toLowerCase()) ||
+                  element.species.toLowerCase().contains(value.trim().toLowerCase()) ||
                   element.origin.toLowerCase().contains(value.trim().toLowerCase()) ||
                   element.location.toLowerCase().contains(value.trim().toLowerCase()) ||
                   element.gender.toLowerCase().contains(value.trim().toLowerCase()) ||
@@ -121,11 +122,31 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Text(AppLocalizations.of(context)!.noCreaturesFoundText),
             );
           } else {
-            return ListView.builder(
-              itemCount: searchedList.length,
-              itemBuilder: (context, index) {
-                return SingleDiseaseCardWidget(diseaseModel: searchedList[index], index: index);
-              },
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: getScreenArea(context, 0.00005)),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getScreenArea(context, 0.00008)),
+                    child: Text('Results found: ${searchedList.length}'),
+                  ),
+                ),
+                SizedBox(height: getScreenArea(context, 0.00003)),
+                Container(
+                  height: getScreenArea(context, 0.00001),
+                  color: Colors.grey.shade300,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: searchedList.length,
+                    itemBuilder: (context, index) {
+                      return SingleDiseaseCardWidget(diseaseModel: searchedList[index], index: index);
+                    },
+                  ),
+                ),
+              ],
             );
           }
         },

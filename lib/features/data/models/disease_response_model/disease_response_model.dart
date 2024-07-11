@@ -34,10 +34,10 @@ class InfoModel extends HiveObject {
   InfoModel(this.count, this.pages, this.nextApi, this.prevApi);
 
   InfoModel.fromJson(Map<String, dynamic> json)
-      : count = json['count'],
-        pages = json['pages'],
-        nextApi = json['next'],
-        prevApi = json['prev'];
+      : count = json['count'] ?? 0,
+        pages = json['pages'] ?? 0,
+        nextApi = json['next'] ?? '',
+        prevApi = json['prev'] ?? '';
 }
 
 @HiveType(typeId: HiveTypes.diseaseModel)

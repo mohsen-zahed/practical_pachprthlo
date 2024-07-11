@@ -88,11 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
             //* Succuss state...
             return RefreshIndicator(
               onRefresh: () async {
-                BlocProvider.of<DiseaseBloc>(context).add(FetchDiseases());
+                context.read<DiseaseBloc>().add(FetchDiseases());
               },
               child: ListView.builder(
-                controller: BlocProvider.of<DiseaseBloc>(context).scrollController,
-                itemCount: BlocProvider.of<DiseaseBloc>(context).isLoadingMore ? diseaseList.length + 1 : diseaseList.length,
+                controller: context.read<DiseaseBloc>().scrollController,
+                itemCount: context.read<DiseaseBloc>().isLoadingMore ? diseaseList.length + 1 : diseaseList.length,
                 itemBuilder: (context, index) {
                   if (index >= diseaseList.length) {
                     return Column(

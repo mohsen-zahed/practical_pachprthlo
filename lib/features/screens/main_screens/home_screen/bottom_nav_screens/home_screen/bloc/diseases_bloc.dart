@@ -14,13 +14,14 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
 
   ScrollController scrollController = ScrollController();
   bool isLoadingMore = false;
-  int page = 2;
+  int page = 1;
   DiseaseBloc(this.diseaseDataProvider) : super(DiseasesStatus(diseasesState: DiseasesLoading())) {
     scrollController.addListener(() {
       add(LoadMoreDiseasesRequested());
     });
     on<FetchDiseases>((event, emit) async {
       try {
+        page = 1;
         emit(state.copyWith(diseasesState: DiseasesLoading()));
 
         final diseaseResponseResults = await diseaseDataProvider.fetchDiseaseData(page);
@@ -55,20 +56,37 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
     });
 
     on<LoadMoreDiseasesRequested>((event, emit) async {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !isLoadingMore) {
         isLoadingMore = true;
         page++;
-        try {
-          DiseaseResponseModel diseaseResponseResult = await diseaseDataProvider.fetchDiseaseData(page);
-          if (state is DiseasesSuccess) {
-            // final currentState = state as DiseasesSuccess;
+        final dynamic diseaseResponseResult;
 
-            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResult)));
+        try {
+          diseaseResponseResult = await diseaseDataProvider.fetchDiseaseData(page);
+
+          if (state.diseasesState is DiseasesSuccess) {
+            diseaseResponseResult as DiseaseResponseModel;
+            final currentState = state.diseasesState as DiseasesSuccess;
+            final updatedDiseases = List<DiseaseModel>.from(currentState.diseaseResponseModel.diseaseModelList)
+              ..addAll(diseaseResponseResult.diseaseModelList);
+
+            emit(state.copyWith(
+              diseasesState: DiseasesSuccess(
+                diseaseResponseModel: DiseaseResponseModel(
+                  diseaseModelList: updatedDiseases,
+                  infoModel: currentState.diseaseResponseModel.infoModel,
+                ),
+              ),
+            ));
           } else {
-            emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResult)));
+            emit(state.copyWith(
+              diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResult),
+            ));
           }
         } catch (e) {
-          emit(state.copyWith(diseasesState: DiseasesFailed(errorMessage: e.toString())));
+          emit(state.copyWith(diseasesState: const DiseasesFailed(errorMessage: 'Error happened')));
+        } finally {
+          isLoadingMore = false;
         }
       }
     });

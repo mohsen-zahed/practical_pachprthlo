@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
+import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 import 'package:practical_pachprthlo/widgets/full_screen_image.dart';
 
@@ -95,6 +97,18 @@ class SingleDiseaseCardWidget extends StatelessWidget {
                       child: Text(
                         'Image by: ${diseaseModel.name}',
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(color: kWhiteColor),
+                      ),
+                    ),
+                    Positioned(
+                      top: getScreenArea(context, 0.00003),
+                      left: getScreenArea(context, 0.00004),
+                      child: CircleAvatar(
+                        radius: getScreenArea(context, 0.00005),
+                        backgroundColor: kWhiteColor,
+                        child: Text(
+                          diseaseModel.id.toString(),
+                          style: Theme.of(context).textTheme.labelSmall!.copyWith(color: context.read<ColorProvider>().primaryColor),
+                        ),
                       ),
                     ),
                   ],
