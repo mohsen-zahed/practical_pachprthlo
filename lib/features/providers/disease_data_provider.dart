@@ -16,7 +16,7 @@ class DiseaseDataProvider {
     required this.page,
   });
 
-  Future<dynamic> fetchDiseaseData(int page) async {
+  Future<dynamic> fetchDiseaseData(int page, {bool? isLoadingMore}) async {
     bool isConnected = await di<MyConnectivityPlusPackage>().checkInternetConnection();
     final bool isDatabaseEmpty = await iLocaleDiseaseRepository.isDataAvailableInDB();
     if (isConnected) {
@@ -26,7 +26,7 @@ class DiseaseDataProvider {
         //* When everything is fine and data can be fetched...
         DiseaseResponseModel diseaseResponseModel = DiseaseResponseModel.fromJson(response.data);
         //* Inserts data to DB so we can read data from DB later...
-        iLocaleDiseaseRepository.insertAllDiseasesToDB(diseaseResponseModel);
+        await iLocaleDiseaseRepository.insertAllDiseasesToDB(diseaseResponseModel);
         final DiseaseResponseModel? cachedResponseModel = await iLocaleDiseaseRepository.getAllDiseasesFromDB();
         return cachedResponseModel as DiseaseResponseModel;
       } else {
@@ -37,7 +37,9 @@ class DiseaseDataProvider {
           return localSourceResponseModel as DiseaseResponseModel;
         } else {
           //* If there is no data available in DB...
-          return 'Unknown error happened!';
+          //* This typically happens when there is a connection but server's response is not
+          //* 200 and no data is available in DB...
+          return Exception('Something went wrong, try again!');
         }
       }
     } else {

@@ -6,6 +6,7 @@ import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
 import 'package:practical_pachprthlo/features/cubit/internet_cubit.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/features/providers/color_provider.dart';
+// import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 import 'package:practical_pachprthlo/features/providers/font_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupDi();
+  // await di<DiseaseDataProvider>().iLocaleDiseaseRepository.clearAllDataFromDB();
   // final x = await SharedPreferences.getInstance();
   // x.clear();
   runApp(const MyApp());

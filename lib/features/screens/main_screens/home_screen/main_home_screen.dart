@@ -70,6 +70,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<InternetCubit, InternetStatus>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == ConnectivityStatus.connected) {
           simpleSnackBarBoxWidget(

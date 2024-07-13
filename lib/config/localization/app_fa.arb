@@ -46,5 +46,9 @@
     "yesText": "بله",
     "noText": "خیر",
     "resetBackToDefaultText": "بازنشانی به تنظیمات پیشفرض؟",
-    "resetAllText": "بازنشانی همه"
+    "resetAllText": "بازنشانی همه",
+    "noNetworkAvailableText": "اتصال به اینترنت موجود نیست",
+    "somethingWentWrongPleaseTryAgainLaterText": "خطایی رخ داده است، لطفا بعدا تلاش کنید!",
+    "currentlyOfflineText": "آفلاین",
+    "backOnlineText": "اتصال مجدد"
 }

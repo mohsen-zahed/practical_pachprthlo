@@ -95,15 +95,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: context.read<DiseaseBloc>().isLoadingMore ? diseaseList.length + 1 : diseaseList.length,
                 itemBuilder: (context, index) {
                   if (index >= diseaseList.length) {
-                    return Column(
-                      children: [
-                        SizedBox(height: getScreenArea(context, 0.00001)),
-                        const CupertinoActivityIndicator(),
-                        SizedBox(height: getScreenArea(context, 0.000007)),
-                        Text(AppLocalizations.of(context)!.loadingMoreText, style: Theme.of(context).textTheme.bodySmall),
-                        SizedBox(height: getScreenArea(context, 0.00004)),
-                      ],
-                    );
+                    if (state.diseasesState is LoadMoreDiseasesFailed) {
+                      return CustomTryAgainButton(
+                        buttonText: AppLocalizations.of(context)!.tryAgainText,
+                        onTap: () {
+                          context.read<DiseaseBloc>().add(FetchDiseases());
+                        },
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          SizedBox(height: getScreenArea(context, 0.00001)),
+                          const CupertinoActivityIndicator(),
+                          SizedBox(height: getScreenArea(context, 0.000007)),
+                          Text(AppLocalizations.of(context)!.loadingMoreText, style: Theme.of(context).textTheme.bodySmall),
+                          SizedBox(height: getScreenArea(context, 0.00004)),
+                        ],
+                      );
+                    }
                   } else {
                     return SingleDiseaseCardWidget(diseaseModel: diseaseList[index], index: index);
                   }

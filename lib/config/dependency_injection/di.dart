@@ -42,7 +42,7 @@ Future<void> setupDi() async {
   di.registerSingleton(DiseaseDataProvider(
     iLocaleDiseaseRepository: di<LocaleDiseaseRepositoryImp>(),
     iRemoteDiseaseRepository: di<RemoteDiseaseRepositoryImp>(),
-    page: 2,
+    page: 1,
   ));
 
   //* RemoteStatisticDataSourceImp...

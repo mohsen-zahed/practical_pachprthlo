@@ -8,10 +8,16 @@ abstract class ILocaleDiseaseDataSource {
   Future<DiseaseResponseModel?> getAllDiseasesFromDB();
 
   //* To insert all data to locale database...
-  Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseModel);
+  Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseResponseModel);
+
+  //* To append data to locale database...
+  Future<void> appendDataToDiseasesDB(DiseaseResponseModel diseaseResponseModel);
 
   //* To check if database contains data or not...
   Future<bool> isDataAvailableInDB();
+
+  //* To clear all data from locale database...
+  Future<void> clearAllDataFromDB();
 }
 
 class LocaleDiseasesDataSourceImp implements ILocaleDiseaseDataSource {
@@ -42,9 +48,9 @@ class LocaleDiseasesDataSourceImp implements ILocaleDiseaseDataSource {
   }
 
   @override
-  Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseModelList) async {
+  Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseResponseModel, {List<dynamic>? moreItemsList}) async {
     try {
-      _diseaseBox.put(_diseaseBoxKey, diseaseModelList);
+      _diseaseBox.put(_diseaseBoxKey, diseaseResponseModel);
     } catch (e) {
       debugPrint("Couldn't insert to DB: ${e.toString()}");
     }
@@ -57,5 +63,33 @@ class LocaleDiseasesDataSourceImp implements ILocaleDiseaseDataSource {
     } catch (e) {
       return true;
     }
+  }
+
+  @override
+  Future<void> appendDataToDiseasesDB(DiseaseResponseModel newDiseaseResponse) async {
+    var box = Hive.box<DiseaseResponseModel>(_diseaseBoxKey);
+    try {
+      List<DiseaseModel> existingDiseases = box.get(_diseaseBoxKey)!.diseaseModelList;
+      InfoModel existingInfo = box.get(_diseaseBoxKey)!.infoModel;
+
+      // Append the new diseases to the existing list
+      existingDiseases.addAll(newDiseaseResponse.diseaseModelList.toList());
+      // Save the updated list back to Hive
+      await box.put(
+        _diseaseBoxKey,
+        DiseaseResponseModel(
+          diseaseModelList: existingDiseases,
+          infoModel: existingInfo,
+        ),
+      );
+    } catch (e) {
+      debugPrint("Couldn't append to DB: ${e.toString()}");
+    }
+    // Retrieve the existing list of diseases
+  }
+
+  @override
+  Future<void> clearAllDataFromDB() async {
+    await _diseaseBox.clear();
   }
 }

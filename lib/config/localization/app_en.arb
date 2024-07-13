@@ -46,5 +46,9 @@
     "yesText": "Yes",
     "noText": "No",
     "resetBackToDefaultText": "Reset back to default?",
-    "resetAllText": "Reset all"
+    "resetAllText": "Reset all",
+    "noNetworkAvailableText": "No network available",
+    "somethingWentWrongPleaseTryAgainLaterText": "Something went wrong, please try again later!",
+    "currentlyOfflineText": "Currently offline",
+    "backOnlineText": "Back online"
 }

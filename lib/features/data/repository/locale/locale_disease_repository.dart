@@ -15,4 +15,11 @@ class LocaleDiseaseRepositoryImp implements ILocaleDiseaseRepository {
 
   @override
   Future<bool> isDataAvailableInDB() => iLocaleDiseaseDataSource.isDataAvailableInDB();
+
+  @override
+  Future<void> appendDataToDiseasesDB(DiseaseResponseModel diseaseResponseModel) =>
+      iLocaleDiseaseDataSource.appendDataToDiseasesDB(diseaseResponseModel);
+
+  @override
+  Future<void> clearAllDataFromDB() => iLocaleDiseaseDataSource.clearAllDataFromDB();
 }
