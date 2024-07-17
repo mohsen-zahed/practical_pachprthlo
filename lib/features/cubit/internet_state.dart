@@ -1,11 +1,11 @@
-part of 'internet_cubit.dart';
+// part of 'internet_cubit.dart';
 
-enum ConnectivityStatus { connected, disconnected }
+// enum ConnectivityStatus { connected, disconnected }
 
-class InternetStatus extends Equatable {
-  final ConnectivityStatus status;
-  const InternetStatus(this.status);
+// class InternetStatus extends Equatable {
+//   final ConnectivityStatus status;
+//   const InternetStatus(this.status);
 
-  @override
-  List<Object> get props => [status];
-}
+//   @override
+//   List<Object> get props => [status];
+// }

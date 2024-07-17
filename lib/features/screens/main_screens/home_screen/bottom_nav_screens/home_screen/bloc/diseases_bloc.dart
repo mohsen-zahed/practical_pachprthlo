@@ -7,6 +7,7 @@ import 'package:practical_pachprthlo/features/data/models/disease_response_model
 import 'package:practical_pachprthlo/features/data/source/locale/locale_disease_data_source.dart';
 import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
+import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package_const.dart';
 
 part 'diseases_event.dart';
 part 'diseases_state.dart';
@@ -19,8 +20,10 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
   bool isLoadingMore = false;
   int page = 1;
   DiseaseBloc(this.diseaseDataProvider) : super(DiseasesStatus(diseasesState: DiseasesLoading())) {
-    scrollController.addListener(() {
-      add(LoadMoreDiseasesRequested());
+    scrollController.addListener(() async {
+      if (isConnected) {
+        add(LoadMoreDiseasesRequested());
+      }
     });
     on<FetchDiseases>((event, emit) async {
       try {

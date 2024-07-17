@@ -56,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true).push(
                       CupertinoPageRoute(
-                        builder: (context) => SearchScreen(diseaseList: diseaseResponseModel.diseaseResponseModel.diseaseModelList),
+                        builder: (context) =>
+                            // TestScreen(),
+                            SearchScreen(diseaseList: diseaseResponseModel.diseaseResponseModel.diseaseModelList),
                       ),
                     );
                   },

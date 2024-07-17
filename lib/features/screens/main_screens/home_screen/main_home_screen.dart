@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
-import 'package:practical_pachprthlo/features/cubit/internet_cubit.dart';
+import 'package:practical_pachprthlo/features/providers/internet_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/home_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/provider_screen_ex/provider_screen_ex.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/settings_screen/settings_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/statistic_screen.dart';
-import 'package:practical_pachprthlo/helpers/pop_up_helpers/simple_snackbar_box.dart';
+import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package_const.dart';
+import 'package:practical_pachprthlo/utils/my_media_query.dart';
 
 int homeIndex = 0;
 int statisticIndex = 1;
@@ -27,7 +29,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   final GlobalKey<NavigatorState> _searchKey = GlobalKey();
   final GlobalKey<NavigatorState> _providerKey = GlobalKey();
   final GlobalKey<NavigatorState> _settingsKey = GlobalKey();
-  late InternetCubit internetCubit;
+  // late InternetCubit internetCubit;
 
   late final map = {
     homeIndex: _homeKey,
@@ -56,105 +58,96 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   void initState() {
     super.initState();
-    internetCubit = context.read<InternetCubit>();
-    internetCubit.checkConnectivity();
-    internetCubit.trackConnectivityChange();
+    // internetCubit = context.read<InternetCubit>();
+    // internetCubit.checkConnectivity();
+    // internetCubit.trackConnectivityChange();
   }
 
   @override
   void dispose() {
     super.dispose();
-    internetCubit.dispose();
+    // internetCubit.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<InternetCubit, InternetStatus>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        if (state.status == ConnectivityStatus.connected) {
-          simpleSnackBarBoxWidget(
-            context: context,
-            title: 'Back online',
-            showCloseButton: false,
-            isInfinite: false,
-          );
-        } else {
-          simpleSnackBarBoxWidget(
-            context: context,
-            title: 'Currently offline',
-            duration: 365,
-            showCloseButton: false,
-            isInfinite: true,
-          );
-        }
-      },
-      builder: (context, state) {
-        return PopScope(
-          onPopInvoked: (f) => _onWillPop,
-          child: Scaffold(
-            body: Stack(
+    return PopScope(
+      onPopInvoked: (f) => _onWillPop,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            IndexedStack(
+              index: selectedScreenIndex,
               children: [
-                IndexedStack(
-                  index: selectedScreenIndex,
-                  children: [
-                    _navigator(_homeKey, homeIndex, const HomeScreen()),
-                    _navigator(_searchKey, statisticIndex, const StatisticScreen()),
-                    _navigator(_providerKey, providerScreenExIndex, const ProviderScreenEx()),
-                    _navigator(_settingsKey, settingsScreenIndex, const SettingsScreen()),
-                  ],
-                ),
-                // Positioned(
-                //   bottom: 0,
-                //   left: 0,
-                //   right: 0,
-                //   child: Container(
-                //     width: getMediaQueryWidth(context),
-                //     height: getScreenArea(context, 0.00007),
-                //     decoration: BoxDecoration(color: isConnected ? kGreenColor : kRedColor),
-                //     child: Center(
-                //       child: Text(
-                //         isConnected ? 'Back online' : 'Offline',
-                //         style: Theme.of(context).textTheme.titleSmall!.copyWith(color: kWhiteColor, letterSpacing: 1.2),
-                //       ),
-                //     ),
-                //   ),
-                // )
+                _navigator(_homeKey, homeIndex, const HomeScreen()),
+                _navigator(_searchKey, statisticIndex, const StatisticScreen()),
+                _navigator(_providerKey, providerScreenExIndex, const ProviderScreenEx()),
+                _navigator(_settingsKey, settingsScreenIndex, const SettingsScreen()),
               ],
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: selectedScreenIndex,
-              onTap: (selectedIndex) {
-                setState(() {
-                  _history.remove(selectedScreenIndex);
-                  _history.add(selectedScreenIndex);
-                  selectedScreenIndex = selectedIndex;
-                  debugPrint(_history.toString());
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.home),
-                  label: AppLocalizations.of(context)!.homeText,
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.stacked_bar_chart),
-                  label: AppLocalizations.of(context)!.statisticsText,
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.preview_outlined),
-                  label: AppLocalizations.of(context)!.providerText,
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.settings),
-                  label: AppLocalizations.of(context)!.settingsText,
-                ),
-              ],
+            context.read<InternetProvider>().showInternetBanner
+                ? AnimatedPositioned(
+                    duration: const Duration(milliseconds: 2000),
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: getScreenArea(context, 0.000015)),
+                      decoration: BoxDecoration(color: isConnected ? kGreenColor : kRedColor),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              isConnected ? Icons.wifi : Icons.wifi_off,
+                              color: kWhiteColor,
+                              size: getScreenArea(context, 0.00006),
+                            ),
+                            SizedBox(width: getScreenArea(context, 0.000015)),
+                            Text(
+                              isConnected ? AppLocalizations.of(context)!.backOnlineText : AppLocalizations.of(context)!.currentlyOfflineText,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(color: kWhiteColor, letterSpacing: 1.2),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: selectedScreenIndex,
+          onTap: (selectedIndex) {
+            setState(() {
+              _history.remove(selectedScreenIndex);
+              _history.add(selectedScreenIndex);
+              selectedScreenIndex = selectedIndex;
+              debugPrint(_history.toString());
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: AppLocalizations.of(context)!.homeText,
             ),
-          ),
-        );
-      },
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.stacked_bar_chart),
+              label: AppLocalizations.of(context)!.statisticsText,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.preview_outlined),
+              label: AppLocalizations.of(context)!.providerText,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.settings),
+              label: AppLocalizations.of(context)!.settingsText,
+            ),
+          ],
+        ),
+      ),
     );
   }
 

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
-import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
-import 'package:provider/provider.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({
@@ -11,11 +9,13 @@ class CustomSearchField extends StatelessWidget {
     required this.searchFocusNode,
     required this.searchController,
     required this.searchTerm,
+    required this.dropDownList,
   });
 
   final FocusNode searchFocusNode;
   final TextEditingController searchController;
   final ValueNotifier<String> searchTerm;
+  final List<String> dropDownList;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,13 @@ class CustomSearchField extends StatelessWidget {
         ),
         suffixIcon: PopupMenuButton(
           itemBuilder: (BuildContext context) {
-            final list = Provider.of<CategoriesProvider>(context, listen: false).searchCategoriesList;
-            list.sort();
+            dropDownList.sort();
             return [
               ...List.generate(
-                list.length,
+                dropDownList.length,
                 (index) => PopupMenuItem(
-                  value: list[index],
-                  child: Text(list[index]),
+                  value: dropDownList[index],
+                  child: Text(dropDownList[index]),
                 ),
               )
             ];

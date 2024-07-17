@@ -21,8 +21,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final ValueNotifier<String> searchTerm = ValueNotifier<String>('');
-  final TextEditingController searchController = TextEditingController();
-  final FocusNode searchFocusNode = FocusNode();
+  TextEditingController searchController = TextEditingController();
+  FocusNode searchFocusNode = FocusNode();
   bool isProSearchModelActive = false;
 
   @override
@@ -41,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> categoriesList = Provider.of<CategoriesProvider>(context, listen: false).searchCategoriesList;
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -55,8 +56,9 @@ class _SearchScreenState extends State<SearchScreen> {
             BlocBuilder<LocalizationBloc, LocalizationState>(
               builder: (context, state) {
                 return Icon(
-                    state.selectedLanguage.locale == const Locale('fa') ? Icons.keyboard_arrow_left_rounded : Icons.keyboard_arrow_right_rounded,
-                    size: getScreenArea(context, 0.00006));
+                  state.selectedLanguage.locale == const Locale('fa') ? Icons.keyboard_arrow_left_rounded : Icons.keyboard_arrow_right_rounded,
+                  size: getScreenArea(context, 0.00006),
+                );
               },
             ),
           ],
@@ -74,12 +76,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       onChanged: (value) {
                         searchTerm.value = value!;
                       },
-                      searchItems: Provider.of<CategoriesProvider>(context).searchCategoriesList,
+                      searchItems: categoriesList,
                     )
                   : CustomSearchField(
                       searchFocusNode: searchFocusNode,
                       searchController: searchController,
                       searchTerm: searchTerm,
+                      dropDownList: categoriesList,
                     ),
             ),
             SizedBox(width: getScreenArea(context, 0.00003)),

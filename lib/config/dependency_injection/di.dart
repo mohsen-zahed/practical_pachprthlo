@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:practical_pachprthlo/features/blocs/language_bloc/localization_bloc.dart';
 import 'package:practical_pachprthlo/features/blocs/theme_bloc/theme_bloc.dart';
-import 'package:practical_pachprthlo/features/cubit/internet_cubit.dart';
+import 'package:practical_pachprthlo/features/providers/color_provider.dart';
 import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 import 'package:practical_pachprthlo/features/data/repository/locale/locale_disease_repository.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_disease_repository.dart';
@@ -10,6 +10,8 @@ import 'package:practical_pachprthlo/features/data/repository/remote/remote_stat
 import 'package:practical_pachprthlo/features/data/source/locale/locale_disease_data_source.dart';
 import 'package:practical_pachprthlo/features/data/source/remote/remote_disease_data_source.dart';
 import 'package:practical_pachprthlo/features/data/source/remote/remote_statistic_data_source.dart';
+import 'package:practical_pachprthlo/features/providers/font_provider.dart';
+import 'package:practical_pachprthlo/features/providers/internet_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
@@ -64,5 +66,14 @@ Future<void> setupDi() async {
   di.registerSingleton<LocalizationBloc>(LocalizationBloc());
 
   //* Internet Connectivity...
-  di.registerSingleton<InternetCubit>(InternetCubit());
+  // di.registerSingleton<InternetCubit>(InternetCubit());
+
+  //* Internet Provider...
+  di.registerSingleton<InternetProvider>(InternetProvider());
+
+  //* Color Provider
+  di.registerSingleton<ColorProvider>(ColorProvider());
+
+  //* Font Provider...
+  di.registerSingleton<FontProvider>(FontProvider());
 }
