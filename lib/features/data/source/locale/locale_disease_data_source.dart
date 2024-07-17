@@ -11,7 +11,7 @@ abstract class ILocaleDiseaseDataSource {
   Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseResponseModel);
 
   //* To append data to locale database...
-  Future<void> appendDataToDiseasesDB(DiseaseResponseModel diseaseResponseModel);
+  Future<void> appendDataToDiseasesDB(List<DiseaseModel> diseaseModelList);
 
   //* To check if database contains data or not...
   Future<bool> isDataAvailableInDB();
@@ -50,6 +50,7 @@ class LocaleDiseasesDataSourceImp implements ILocaleDiseaseDataSource {
   @override
   Future<void> insertAllDiseasesToDB(DiseaseResponseModel diseaseResponseModel, {List<dynamic>? moreItemsList}) async {
     try {
+      print(diseaseResponseModel.diseaseModelList.length);
       _diseaseBox.put(_diseaseBoxKey, diseaseResponseModel);
     } catch (e) {
       debugPrint("Couldn't insert to DB: ${e.toString()}");
@@ -66,14 +67,14 @@ class LocaleDiseasesDataSourceImp implements ILocaleDiseaseDataSource {
   }
 
   @override
-  Future<void> appendDataToDiseasesDB(DiseaseResponseModel newDiseaseResponse) async {
+  Future<void> appendDataToDiseasesDB(List<DiseaseModel> newDiseaseModel) async {
     var box = Hive.box<DiseaseResponseModel>(_diseaseBoxKey);
     try {
       List<DiseaseModel> existingDiseases = box.get(_diseaseBoxKey)!.diseaseModelList;
       InfoModel existingInfo = box.get(_diseaseBoxKey)!.infoModel;
 
       // Append the new diseases to the existing list
-      existingDiseases.addAll(newDiseaseResponse.diseaseModelList.toList());
+      existingDiseases.addAll(newDiseaseModel);
       // Save the updated list back to Hive
       await box.put(
         _diseaseBoxKey,

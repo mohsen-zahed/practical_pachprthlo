@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
+import 'package:practical_pachprthlo/features/data/source/locale/locale_disease_data_source.dart';
 import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
 
@@ -25,7 +26,6 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
       try {
         page = 1;
         emit(state.copyWith(diseasesState: DiseasesLoading()));
-
         final diseaseResponseResults = await diseaseDataProvider.fetchDiseaseData(page);
         if (diseaseResponseResults is DiseaseResponseModel) {
           emit(state.copyWith(diseasesState: DiseasesSuccess(diseaseResponseModel: diseaseResponseResults)));
@@ -65,15 +65,19 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
 
         try {
           final hasInternet = await di<MyConnectivityPlusPackage>().checkInternetConnection();
-          diseaseResponseResult = await diseaseDataProvider.fetchDiseaseData(page, isLoadingMore: true);
 
           if (hasInternet) {
+            diseaseResponseResult = await diseaseDataProvider.fetchDiseaseData(page, isLoadingMore: true);
             if (state.diseasesState is DiseasesSuccess) {
               diseaseResponseResult as DiseaseResponseModel;
               final currentState = state.diseasesState as DiseasesSuccess;
               final updatedDiseases = List<DiseaseModel>.from(currentState.diseaseResponseModel.diseaseModelList)
                 ..addAll(diseaseResponseResult.diseaseModelList);
-
+              //* Traditional method to store data to DB after merging with the previous list :D...
+              //* It is just for now, I will use the new method to store data as soon as I learn how...
+              await LocaleDiseasesDataSourceImp().insertAllDiseasesToDB(
+                DiseaseResponseModel(infoModel: diseaseResponseResult.infoModel, diseaseModelList: updatedDiseases),
+              );
               emit(state.copyWith(
                 diseasesState: DiseasesSuccess(
                   diseaseResponseModel: DiseaseResponseModel(
@@ -88,9 +92,9 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
               ));
             }
           } else {
-            emit(state.copyWith(
-              diseasesState: LoadMoreDiseasesFailed(errorMessage: 'Not Connected to Internet'),
-            ));
+            // emit(state.copyWith(
+            //   diseasesState: const LoadMoreDiseasesFailed(errorMessage: 'Not Connected to Internet'),
+            // ));
           }
         } on DioException catch (e) {
           isLoadingMore = false;
