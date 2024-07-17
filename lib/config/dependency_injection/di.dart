@@ -14,7 +14,6 @@ import 'package:practical_pachprthlo/features/providers/font_provider.dart';
 import 'package:practical_pachprthlo/features/providers/internet_provider.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/bloc/diseases_bloc.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/statistic_screen/bloc/statistic_bloc.dart';
-import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
 import 'package:practical_pachprthlo/packages/dio_package/my_dio_package.dart';
 
 GetIt di = GetIt.instance;
@@ -22,7 +21,7 @@ GetIt di = GetIt.instance;
 Future<void> setupDi() async {
   //* Network services...
   di.registerSingleton<MyDioPackage>(MyDioPackage.instance);
-  di.registerSingleton<MyConnectivityPlusPackage>(MyConnectivityPlusPackage.instance);
+  // di.registerSingleton<MyConnectivityPlusPackage>(MyConnectivityPlusPackage.instance);
 
   //* DB initialization...
   await Hive.initFlutter();

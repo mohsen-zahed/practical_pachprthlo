@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/data/repository/locale/locale_disease_repository.dart';
 import 'package:practical_pachprthlo/features/data/repository/remote/remote_disease_repository.dart';
-import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
+import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package_const.dart';
 
 class DiseaseDataProvider {
   final ILocaleDiseaseRepository iLocaleDiseaseRepository;
@@ -17,7 +16,6 @@ class DiseaseDataProvider {
   });
 
   Future<dynamic> fetchDiseaseData(int page, {bool? isLoadingMore}) async {
-    bool isConnected = await di<MyConnectivityPlusPackage>().checkInternetConnection();
     final bool isDatabaseEmpty = await iLocaleDiseaseRepository.isDataAvailableInDB();
     if (isConnected) {
       //* When there is a connection...

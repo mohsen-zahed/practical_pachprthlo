@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practical_pachprthlo/config/constants/colors.dart';
-import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/config/localization/l10n.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/providers/categories_provider.dart';
@@ -13,7 +12,7 @@ import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/b
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/sub_screens/search_screen/search_screen.dart';
 import 'package:practical_pachprthlo/features/screens/main_screens/home_screen/bottom_nav_screens/home_screen/widgets/single_disease_card_widget.dart';
 import 'package:practical_pachprthlo/helpers/pop_up_helpers/simple_snackbar_box.dart';
-import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
+import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package_const.dart';
 import 'package:practical_pachprthlo/utils/my_media_query.dart';
 import 'package:practical_pachprthlo/widgets/custom_try_again_button.dart';
 import 'package:provider/provider.dart';
@@ -188,18 +187,15 @@ class _HomeScreenState extends State<HomeScreen> {
               context.read<CategoriesProvider>().addCategory(list[i].origin);
               context.read<CategoriesProvider>().addCategory(list[i].type);
             }
-            await di<MyConnectivityPlusPackage>().checkInternetConnection().then(
-              (value) {
-                final String source = value ? AppLocalizations.of(context)!.apiText : AppLocalizations.of(context)!.databaseText;
-                String msg = "${AppLocalizations.of(context)!.dataRetrievedFromText} $source";
-                simpleSnackBarBoxWidget(
-                  context: context,
-                  isInfinite: false,
-                  title: msg,
-                  color: Provider.of<ColorProvider>(context, listen: false).primaryColor,
-                  showCloseButton: true,
-                );
-              },
+
+            final String source = isConnected ? AppLocalizations.of(context)!.apiText : AppLocalizations.of(context)!.databaseText;
+            String msg = "${AppLocalizations.of(context)!.dataRetrievedFromText} $source";
+            simpleSnackBarBoxWidget(
+              context: context,
+              isInfinite: false,
+              title: msg,
+              color: Provider.of<ColorProvider>(context, listen: false).primaryColor,
+              showCloseButton: true,
             );
           }
         },

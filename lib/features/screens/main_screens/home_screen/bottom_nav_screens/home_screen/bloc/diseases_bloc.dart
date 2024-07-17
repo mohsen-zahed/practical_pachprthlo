@@ -2,11 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:practical_pachprthlo/config/dependency_injection/di.dart';
 import 'package:practical_pachprthlo/features/data/models/disease_response_model/disease_response_model.dart';
 import 'package:practical_pachprthlo/features/data/source/locale/locale_disease_data_source.dart';
 import 'package:practical_pachprthlo/features/providers/disease_data_provider.dart';
-import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package.dart';
 import 'package:practical_pachprthlo/packages/connectivity_plus_package/my_connectivity_plus_package_const.dart';
 
 part 'diseases_event.dart';
@@ -67,9 +65,7 @@ class DiseaseBloc extends Bloc<DiseasesEvent, DiseasesStatus> {
         final dynamic diseaseResponseResult;
 
         try {
-          final hasInternet = await di<MyConnectivityPlusPackage>().checkInternetConnection();
-
-          if (hasInternet) {
+          if (isConnected) {
             diseaseResponseResult = await diseaseDataProvider.fetchDiseaseData(page, isLoadingMore: true);
             if (state.diseasesState is DiseasesSuccess) {
               diseaseResponseResult as DiseaseResponseModel;
